@@ -1,17 +1,11 @@
-import "@/styles/globals.css";
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+// App.js
+import { ColorModeProvider } from "@/components/theme/ColorModeProvider";
+import React from "react";
 
 export default function App({ Component, pageProps }) {
-  const darkTheme = createTheme({
-    palette: {
-      mode: "dark",
-    },
-  });
-
   return (
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
+    <ColorModeProvider>
       <Component {...pageProps} />
-    </ThemeProvider>
+    </ColorModeProvider>
   );
 }
