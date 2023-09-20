@@ -1,10 +1,11 @@
 // ColorModeProvider.js
-import React, { createContext, useState, useMemo, useEffect } from "react";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { Box } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
-import { amber, deepOrange, grey } from "@mui/material/colors";
+// import { amber, deepOrange, grey } from "@mui/material/colors";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import React from "react";
 
-export const ColorModeContext = createContext();
+export const ColorModeContext = React.createContext();
 
 export function ColorModeProvider({ children }) {
   const [mode, setMode] = React.useState("light");
@@ -13,7 +14,7 @@ export function ColorModeProvider({ children }) {
     localStorage.setItem("themeMode", mode === "light" ? "dark" : "light");
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     const savedMode = localStorage.getItem("themeMode");
     if (savedMode) {
       setMode(savedMode);
@@ -27,7 +28,6 @@ export function ColorModeProvider({ children }) {
           mode,
           // ...(mode === "light"
           //   ? {
-          //       // palette values for light mode
           //       primary: amber,
           //       divider: amber[200],
           //       text: {
@@ -36,7 +36,6 @@ export function ColorModeProvider({ children }) {
           //       },
           //     }
           //   : {
-          //       // palette values for dark mode
           //       primary: deepOrange,
           //       divider: deepOrange[700],
           //       background: {
@@ -54,11 +53,13 @@ export function ColorModeProvider({ children }) {
   );
 
   return (
-    <ColorModeContext.Provider value={{ toggleColorMode, theme }}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        {children}
-      </ThemeProvider>
-    </ColorModeContext.Provider>
+    <Box sx={{ transition: "background-color 0.3s, color 0.3s" }}>
+      <ColorModeContext.Provider value={{ toggleColorMode, theme }}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          {children}
+        </ThemeProvider>
+      </ColorModeContext.Provider>
+    </Box>
   );
 }
