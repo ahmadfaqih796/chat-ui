@@ -2,12 +2,12 @@ import createEmotionCache from "@/createEmotionCache";
 import "@/styles/globals.css";
 
 import { ColorModeProvider } from "@/components/theme/ColorModeProvider";
-import BlankLayout from "@/layouts/BlankLayout";
+import { AdminLayout, BlankLayout } from "@/layouts";
 
 const clientSideEmotionCache = createEmotionCache();
 
 const layouts = {
-  Admin: "",
+  Admin: AdminLayout,
   User: "",
 };
 
