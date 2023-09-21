@@ -3,22 +3,23 @@ import "@/styles/globals.css";
 
 import { ColorModeProvider } from "@/components/theme/ColorModeProvider";
 import { AdminLayout, BlankLayout } from "@/layouts";
+import UserLayout from "@/layouts/UserLayout";
 
 const clientSideEmotionCache = createEmotionCache();
 
 const layouts = {
   Admin: AdminLayout,
-  User: "",
+  User: UserLayout,
 };
 
 export default function App(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const Layout = layouts[Component.layout] || BlankLayout;
   return (
-    <Layout>
-      <ColorModeProvider>
+    <ColorModeProvider>
+      <Layout>
         <Component {...pageProps} />
-      </ColorModeProvider>
-    </Layout>
+      </Layout>
+    </ColorModeProvider>
   );
 }

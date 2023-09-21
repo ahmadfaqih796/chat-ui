@@ -1,4 +1,3 @@
-// ColorModeProvider.js
 import { Box } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 // import { amber, deepOrange, grey } from "@mui/material/colors";

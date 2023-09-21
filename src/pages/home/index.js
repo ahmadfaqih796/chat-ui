@@ -10,5 +10,5 @@ const Home = () => {
     </React.Fragment>
   );
 };
-
+Home.layout = "User";
 export default Home;
