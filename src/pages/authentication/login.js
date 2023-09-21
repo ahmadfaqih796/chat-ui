@@ -32,20 +32,24 @@ const Login = () => {
       strategy: "local",
     };
     try {
-      const response = await fetch("/api/auth/login", {
+      const fetching = await fetch("/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
-      const res = await response.json();
-      console.log("vvvvv", res);
-      setColor(res.code === 401 ? "error" : "success");
-      setMessage(res.message || "Anda berhasil login");
+      const response = await fetching.json();
       setOpen(true);
+      if (response.code === 401) {
+        setColor("error");
+        setMessage(response.message);
+        return;
+      }
+      setColor("success");
+      setMessage(response.message || "Anda berhasil login");
     } catch (error) {
-      console.log("ddddddddddddd", error);
+      console.log("Error :", error);
       setColor("error");
       setMessage("Terjadi kesalahan pada server");
       setOpen(true);
