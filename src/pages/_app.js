@@ -16,9 +16,9 @@ export default function App(props) {
   const Layout = layouts[Component.layout] || BlankLayout;
   return (
     <Layout>
-      {/* <ColorModeProvider>
-      </ColorModeProvider> */}
-      <Component {...pageProps} />
+      <ColorModeProvider>
+        <Component {...pageProps} />
+      </ColorModeProvider>
     </Layout>
   );
 }

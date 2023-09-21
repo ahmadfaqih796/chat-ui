@@ -11,11 +11,10 @@ import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import FeatherIcon from "feather-icons-react";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
-// image
-// import brand from "../../../assets/images/ujianOnline.png";
+import brand from "../../../public/next.svg";
 
 const Login = () => {
   const router = useRouter();
@@ -51,6 +50,7 @@ const Login = () => {
       }
       setColor("success");
       setMessage(response.message || "Anda berhasil login");
+      router.replace("/home");
     } catch (error) {
       console.log("Error :", error);
       setColor("error");
@@ -66,7 +66,15 @@ const Login = () => {
       flexWrap="wrap"
       alignItems="center"
     >
-      {/* <Image className="brand-login" src={brand} alt="bg" /> */}
+      <Image
+        src={brand}
+        alt="bg"
+        style={{
+          width: "700px",
+          height: "100vh",
+          margin: "0 auto",
+        }}
+      />
       <Container component="main" maxWidth="xs">
         <Box
           sx={{
