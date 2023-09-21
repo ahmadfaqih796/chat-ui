@@ -1,5 +1,5 @@
 import { MainWrapper, PageWrapper } from "@/styles/Wrapper";
-import { Container } from "@mui/material";
+import { Container, useMediaQuery } from "@mui/material";
 import Box from "@mui/material/Box";
 import React from "react";
 import Header from "./header/Header";
@@ -7,6 +7,7 @@ import Sidebar from "./sidebar/Sidebar";
 
 function UserLayout({ children }) {
   const [open, setOpen] = React.useState(false);
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -18,8 +19,16 @@ function UserLayout({ children }) {
 
   return (
     <MainWrapper>
-      <Header open={open} handleDrawerOpen={handleDrawerOpen} />
-      <Sidebar open={open} handleDrawerClose={handleDrawerClose} />
+      <Header
+        open={open}
+        handleDrawerOpen={handleDrawerOpen}
+        isMobile={isMobile}
+      />
+      <Sidebar
+        open={open}
+        handleDrawerClose={handleDrawerClose}
+        isMobile={isMobile}
+      />
       <PageWrapper>
         <Container maxWidth={false}>
           <Box sx={{ minHeight: "calc(100vh - 170px)", mt: 3 }}>{children}</Box>

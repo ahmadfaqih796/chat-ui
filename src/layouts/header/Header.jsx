@@ -1,11 +1,9 @@
-import React from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import MenuIcon from "@mui/icons-material/Menu";
 import MuiAppBar from "@mui/material/AppBar";
+import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import { ColorModeContext } from "@/components/theme/ColorModeProvider";
+import { styled } from "@mui/material/styles";
 
 const drawerWidth = 240;
 
@@ -28,7 +26,7 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-function Header({ open, handleDrawerOpen }) {
+function Header({ open, handleDrawerOpen, isMobile }) {
   return (
     <AppBar position="fixed" open={open} sx={{ height: "70px" }}>
       <Toolbar>
@@ -45,7 +43,7 @@ function Header({ open, handleDrawerOpen }) {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" noWrap component="div">
-          Mini variant drawer
+          {isMobile ? "nooooooooo" : "yessss"}Mini variant drawer
         </Typography>
       </Toolbar>
     </AppBar>
