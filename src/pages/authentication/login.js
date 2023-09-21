@@ -1,5 +1,7 @@
 import CloseIcon from "@mui/icons-material/Close";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Alert, Collapse, IconButton, InputAdornment } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -129,11 +131,11 @@ const Login = () => {
                       <IconButton
                         onClick={() => setPasswordVisible(!passwordVisible)}
                       >
-                        <FeatherIcon
-                          color="white"
-                          icon={passwordVisible ? "eye" : "eye-off"}
-                          width="20"
-                        />
+                        {passwordVisible ? (
+                          <VisibilityIcon />
+                        ) : (
+                          <VisibilityOffIcon />
+                        )}
                       </IconButton>
                     </InputAdornment>
                   ),
