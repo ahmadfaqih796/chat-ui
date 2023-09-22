@@ -3,6 +3,8 @@ import MuiDrawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import { styled, useTheme } from "@mui/material/styles";
 import SidebarContent from "./SidebarContent";
+import React from "react";
+import SwipeableTemporaryDrawer from "./SidebarMobile";
 
 const drawerWidth = 240;
 
@@ -44,22 +46,24 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-function Sidebar({ open, handleDrawerClose }) {
+function Sidebar({ open, handleDrawerClose, isMobileSidebarOpen }) {
   const theme = useTheme();
 
   return (
-    <Drawer variant="permanent" open={open}>
-      <div>
-        <IconButton onClick={handleDrawerClose} sx={{ height: "70px" }}>
-          {theme.direction === "rtl" ? (
-            <ChevronLeftIcon />
-          ) : (
-            <ChevronLeftIcon />
-          )}
-        </IconButton>
-      </div>
-      <SidebarContent />
-    </Drawer>
+    <React.Fragment>
+      <Drawer variant="permanent" open={open}>
+        <div>
+          <IconButton onClick={handleDrawerClose} sx={{ height: "70px" }}>
+            {theme.direction === "rtl" ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronLeftIcon />
+            )}
+          </IconButton>
+        </div>
+        <SidebarContent />
+      </Drawer>
+    </React.Fragment>
   );
 }
 
