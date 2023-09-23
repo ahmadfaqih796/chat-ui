@@ -1,11 +1,13 @@
 import Box from "@mui/material/Box";
+import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import { useState } from "react";
+import React from "react";
 import SidebarContent from "./SidebarContent";
+import { IconButton } from "@mui/material";
 
-export default function SidebarSwipeable({ isMobile }) {
-  const [state, setState] = useState({
+const SidebarSwipeable = () => {
+  const [state, setState] = React.useState({
     left: false,
   });
 
@@ -32,25 +34,28 @@ export default function SidebarSwipeable({ isMobile }) {
   );
 
   return (
-    <div>
-      {isMobile && (
-        <>
-          <Button
-            sx={{ background: "red" }}
-            onClick={toggleDrawer("left", state.left == false ? true : false)}
-          >
-            Open
-          </Button>
-          <SwipeableDrawer
-            anchor="left"
-            open={state.left}
-            onClose={toggleDrawer("left", false)}
-            onOpen={toggleDrawer("left", true)}
-          >
-            {list("left")}
-          </SwipeableDrawer>
-        </>
-      )}
-    </div>
+    <React.Fragment>
+      <IconButton
+        color="inherit"
+        aria-label="open drawer"
+        onClick={toggleDrawer("left", state.left == false ? true : false)}
+        edge="start"
+        sx={{
+          marginRight: 5,
+        }}
+      >
+        <MenuIcon />
+      </IconButton>
+      <SwipeableDrawer
+        anchor="left"
+        open={state.left}
+        onClose={toggleDrawer("left", false)}
+        onOpen={toggleDrawer("left", true)}
+      >
+        {list("left")}
+      </SwipeableDrawer>
+    </React.Fragment>
   );
-}
+};
+
+export default SidebarSwipeable;

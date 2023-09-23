@@ -30,7 +30,6 @@ function UserLayout({ children }) {
         open={open}
         handleDrawerClose={handleDrawerClose}
         isMobileSidebarOpen={isMobileSidebarOpen}
-        isMobile={isMobile}
       />
       <PageWrapper>
         <Container maxWidth={false}>

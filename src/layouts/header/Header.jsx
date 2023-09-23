@@ -31,19 +31,22 @@ function Header({ open, handleDrawerOpen, isMobile }) {
   return (
     <AppBar position="fixed" open={open} sx={{ height: "70px" }}>
       <Toolbar>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={handleDrawerOpen}
-          edge="start"
-          sx={{
-            marginRight: 5,
-            ...(open && { display: "none" }),
-          }}
-        >
-          <MenuIcon />
-        </IconButton>
-        <SidebarSwipeable isMobile={isMobile} />
+        {isMobile ? (
+          <SidebarSwipeable />
+        ) : (
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{
+              marginRight: 5,
+              ...(open && { display: "none" }),
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
+        )}
         <Typography variant="h6" noWrap component="div">
           {isMobile ? "nooooooooo" : "yessss"}Mini variant drawer
         </Typography>
