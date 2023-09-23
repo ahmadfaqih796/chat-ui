@@ -9,8 +9,8 @@ import SidebarSwipeable from "../sidebar/SidebarSwipeable";
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
+  shouldForwardProp: (prop) => prop !== "open" && prop !== "isMobile",
+})(({ theme, open, isMobile }) => ({
   background: theme.palette.primary,
   zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(["width", "margin"], {
@@ -19,7 +19,7 @@ const AppBar = styled(MuiAppBar, {
   }),
   ...(open && {
     marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
+    width: `calc(100% - ${isMobile ? 0 : drawerWidth}px)`,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -28,8 +28,14 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 function Header({ open, handleDrawerOpen, isMobile }) {
+  const drawerWidth = isMobile ? 0 : 240;
   return (
-    <AppBar position="fixed" open={open} sx={{ height: "70px" }}>
+    <AppBar
+      position="fixed"
+      open={open}
+      isMobile={isMobile}
+      sx={{ height: "70px" }}
+    >
       <Toolbar>
         {isMobile ? (
           <SidebarSwipeable />

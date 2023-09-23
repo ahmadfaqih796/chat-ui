@@ -7,7 +7,6 @@ import Sidebar from "./sidebar/Sidebar";
 
 function UserLayout({ children }) {
   const [open, setOpen] = React.useState(false);
-  const [isMobileSidebarOpen, setMobileSidebarOpen] = React.useState(false);
   const isMobile = useMediaQuery("(max-width: 600px)");
 
   const handleDrawerOpen = () => {
@@ -23,13 +22,12 @@ function UserLayout({ children }) {
       <Header
         open={open}
         handleDrawerOpen={handleDrawerOpen}
-        toggleMobileSidebar={() => setMobileSidebarOpen(true)}
         isMobile={isMobile}
       />
       <Sidebar
         open={open}
         handleDrawerClose={handleDrawerClose}
-        isMobileSidebarOpen={isMobileSidebarOpen}
+        isMobile={isMobile}
       />
       <PageWrapper>
         <Container maxWidth={false}>
