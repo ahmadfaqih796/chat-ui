@@ -45,25 +45,27 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-function Sidebar({ open, handleDrawerClose, isMobile }) {
+function Sidebar({ open, handleDrawerClose }) {
   const theme = useTheme();
 
   return (
     <React.Fragment>
-      {!isMobile && (
-        <Drawer variant="permanent" open={open}>
-          <div>
-            <IconButton onClick={handleDrawerClose} sx={{ height: "70px" }}>
-              {theme.direction === "rtl" ? (
-                <ChevronLeftIcon />
-              ) : (
-                <ChevronLeftIcon />
-              )}
-            </IconButton>
-          </div>
-          <SidebarContent />
-        </Drawer>
-      )}
+      <Drawer
+        variant="permanent"
+        open={open}
+        sx={{ display: { xs: "none", sm: "block" } }}
+      >
+        <div>
+          <IconButton onClick={handleDrawerClose} sx={{ height: "70px" }}>
+            {theme.direction === "rtl" ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronLeftIcon />
+            )}
+          </IconButton>
+        </div>
+        <SidebarContent />
+      </Drawer>
     </React.Fragment>
   );
 }
