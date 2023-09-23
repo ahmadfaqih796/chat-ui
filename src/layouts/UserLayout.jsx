@@ -35,7 +35,6 @@ function UserLayout({ children }) {
       <PageWrapper>
         <Container maxWidth={false}>
           <Box sx={{ minHeight: "calc(100vh - 170px)", mt: 3 }}>{children}</Box>
-          sasas
         </Container>
       </PageWrapper>
     </MainWrapper>

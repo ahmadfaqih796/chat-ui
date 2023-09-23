@@ -4,6 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
+import SidebarSwipeable from "../sidebar/SidebarSwipeable";
 
 const drawerWidth = 240;
 
@@ -42,6 +43,7 @@ function Header({ open, handleDrawerOpen, isMobile }) {
         >
           <MenuIcon />
         </IconButton>
+        <SidebarSwipeable isMobile={isMobile} />
         <Typography variant="h6" noWrap component="div">
           {isMobile ? "nooooooooo" : "yessss"}Mini variant drawer
         </Typography>
