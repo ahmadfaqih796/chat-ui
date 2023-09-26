@@ -1,106 +1,102 @@
 import CloseIcon from "@mui/icons-material/Close";
-import {
-  Alert,
-  Button,
-  CircularProgress,
-  Collapse,
-  FormLabel,
-  IconButton,
-  InputAdornment,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { Box } from "@mui/system";
-import FeatherIcon from "feather-icons-react";
-import React from "react";
-
-import { AUTH_MANAGEMENT_CODE } from "@/utils/AuthManagement";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { Alert, Collapse, IconButton, InputAdornment } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import Image from "next/image";
 import { useRouter } from "next/router";
+import React from "react";
+import brand from "../../../public/next.svg";
 
-const ResetPassword = () => {
+const Login = () => {
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
-  const [color, setColor] = React.useState("success");
+  const [color, setColor] = React.useState("");
   const [message, setMessage] = React.useState("");
-  const [loading, setLoading] = React.useState(false);
-  const [template, setTamplate] = React.useState(false);
 
-  const [passwordVisible, setPasswordVisible] = React.useState(false);
-  const [passwordConfirmVisible, setPasswordConfirmVisible] =
-    React.useState(false);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setLoading(true);
-    const { target } = event;
-    const { password, passwordConfirm, otp } = target;
-    if (password.value.length <= 8 && password.value.length <= 8) {
-      setMessage("password harus lebih dari 8 karakter");
-      setColor("error");
-      setOpen(true);
-      setLoading(false);
-      return;
-    }
-    if (password.value != passwordConfirm.value) {
-      setMessage("password tidak sama dengan password konfirmasi");
-      setColor("error");
-      setOpen(true);
-      setLoading(false);
-      return;
-    }
+  const handleLogin = async (event) => {
     setOpen(false);
+    event.preventDefault();
+    const { target } = event;
+    const { email } = target;
     const payload = {
-      action: AUTH_MANAGEMENT_CODE.resetPasswordShort,
+      email: email.value,
+      action: "sendResetPwd",
       value: {
-        user: {
-          email: router.query.email ?? "",
-        },
-        token: otp.value,
-        password: password.value,
+        email: email.value,
       },
     };
     try {
-      await ServiceAdapter().post("/auth-management", payload);
+      const fetching = await fetch("/api/auth/management", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      const response = await fetching.json();
+      console.log("rrrrrrrrrr", response);
+      setOpen(true);
+      // if (response.code === 401) {
+      //   setColor("error");
+      //   setMessage(response.message);
+      //   return;
+      // }
       setColor("success");
-      setMessage(
-        "Password berhasil diperbarui, silahkan kembali ke halaman login"
-      );
-      setOpen(true);
-      event.target.reset();
-      setLoading(false);
-      setTamplate(true);
-      setTimeout(() => {
-        router.replace("/absen/login");
-      }, 5000);
+      setMessage(response.message || "Anda berhasil login");
+      router.replace("/home");
     } catch (error) {
-      setMessage(
-        error.response.data.message ?? "Terjadi kesalahan pada server"
-      );
+      console.log("Error :", error);
       setColor("error");
+      setMessage("Terjadi kesalahan pada server");
       setOpen(true);
-      setLoading(false);
+      return;
     }
   };
-
   return (
-    <>
-      <Box
-        sx={{
-          height: "90vh",
-          width: "300px",
-          display: "flex",
-          m: "0 auto",
-          alignItems: "center",
+    <Box
+      display="flex"
+      justifyContent="space-around"
+      flexWrap="wrap"
+      alignItems="center"
+    >
+      <Image
+        src={brand}
+        alt="bg"
+        style={{
+          width: "700px",
+          height: "100vh",
+          margin: "0 auto",
         }}
-      >
-        <Box width="100%">
-          <Box sx={{ textAlign: "center", mb: "2vh" }}>
-            {/* <Image src={logo} alt="bg" width={"100px"} height={"140px"} /> */}
-          </Box>
+      />
+      <Container component="main" maxWidth="xs">
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100vh",
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
           <Collapse in={open}>
             <Alert
               variant="filled"
-              severity={color}
+              severity={color || "info"}
               action={
                 <IconButton
                   aria-label="close"
@@ -113,149 +109,46 @@ const ResetPassword = () => {
                   <CloseIcon fontSize="inherit" />
                 </IconButton>
               }
-              sx={{ mb: 2 }}
+              sx={{ mb: 2, mt: 2, width: "100%" }}
             >
               <Typography color={"white"}>{message}</Typography>
             </Alert>
           </Collapse>
-
-          {!template && (
-            <form onSubmit={(e) => handleSubmit(e)}>
-              <FormLabel
-                htmlFor="password"
-                sx={{ color: "#1BA0E2", fontWeight: "700", mt: "3vh" }}
-              >
-                Password Baru
-              </FormLabel>
+          <Box>
+            <form onSubmit={(e) => handleLogin(e)}>
               <TextField
-                id="password"
-                name="password"
-                type={passwordVisible ? "text" : "password"}
-                variant="outlined"
-                fullWidth
-                size="small"
-                placeholder="Masukan password kamu disini"
-                sx={{
-                  background: "#1ba0e20d",
-                  borderRadius: "6px",
-                  border: "1px solid #1ba0e20d",
-                }}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        onClick={() => setPasswordVisible(!passwordVisible)}
-                      >
-                        <FeatherIcon
-                          color="black"
-                          icon={passwordVisible ? "eye" : "eye-off"}
-                          width="20"
-                        />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <CustomFormLabel
-                htmlFor="passwordConfirm"
-                sx={{ color: "#1BA0E2", fontWeight: "700", mt: "3vh" }}
-              >
-                Password konfirmasi
-              </CustomFormLabel>
-              <CustomTextField
-                id="passwordConfirm"
-                name="passwordConfirm"
-                type={passwordConfirmVisible ? "text" : "password"}
-                variant="outlined"
-                fullWidth
-                size="small"
-                placeholder="Masukan password kamu disini"
-                sx={{
-                  background: "#1ba0e20d",
-                  borderRadius: "6px",
-                  border: "1px solid #1ba0e20d",
-                }}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        onClick={() =>
-                          setPasswordConfirmVisible(!passwordConfirmVisible)
-                        }
-                      >
-                        <FeatherIcon
-                          color="black"
-                          icon={passwordConfirmVisible ? "eye" : "eye-off"}
-                          width="20"
-                        />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <CustomFormLabel
-                htmlFor="otp"
-                sx={{ color: "#1BA0E2", fontWeight: "700" }}
-              >
-                OTP
-              </CustomFormLabel>
-              <CustomTextField
+                margin="normal"
                 required
-                id="otp"
-                name="otp"
-                variant="outlined"
                 fullWidth
-                size="small"
-                placeholder="Masukan kode otp kamu disini"
-                sx={{
-                  background: "#1ba0e20d",
-                  borderRadius: "6px",
-                  border: "1px solid #1ba0e20d",
-                }}
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
               />
               <Button
-                color="primary"
-                variant="contained"
-                disabled={loading}
-                size="large"
                 type="submit"
                 fullWidth
-                sx={{
-                  pt: "10px",
-                  pb: "10px",
-                  mt: "5vh",
-                  background: "#1BA0E2",
-                  fontWeight: "600",
-                  borderRadius: "100px",
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Kirim
+              </Button>
+              <Button
+                fullWidth
+                variant="contained"
+                sx={{ mt: 1 }}
+                onClick={() => {
+                  router.replace("/authentication/login");
                 }}
               >
-                {loading ? <CircularProgress size={25} /> : "Submit"}
+                Kembali
               </Button>
             </form>
-          )}
-
-          <Box
-            mt="5vh"
-            width="300px"
-            display="flex"
-            m="5vh auto 0"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Typography>Kembali ke halaman</Typography>
-            <Button
-              sx={{ ml: "-10px" }}
-              onClick={() => {
-                router.push("/absen/login");
-              }}
-            >
-              Login
-            </Button>
           </Box>
         </Box>
-      </Box>
-    </>
+      </Container>
+    </Box>
   );
 };
-
-export default ResetPassword;
+export default Login;
