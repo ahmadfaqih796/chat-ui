@@ -15,7 +15,6 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 import brand from "../../../public/next.svg";
-import InputToken from "@/components/forms/InputToken";
 
 const Login = () => {
   const router = useRouter();
@@ -114,7 +113,6 @@ const Login = () => {
             </Alert>
           </Collapse>
           <Box>
-            <InputToken />
             <form onSubmit={(e) => handleLogin(e)}>
               <TextField
                 margin="normal"
