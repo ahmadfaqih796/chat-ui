@@ -1,4 +1,4 @@
-import { loginService } from "@/lib/services/login";
+import { loginService } from "@/lib/services/auth";
 import { withSessionRoute } from "@/lib/session/withSession";
 
 async function loginRoute(req, res) {
