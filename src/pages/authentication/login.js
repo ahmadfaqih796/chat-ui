@@ -15,6 +15,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 import brand from "../../../public/next.svg";
+import InputToken from "@/components/forms/InputToken";
 
 const Login = () => {
   const router = useRouter();
@@ -113,6 +114,7 @@ const Login = () => {
             </Alert>
           </Collapse>
           <Box>
+            <InputToken />
             <form onSubmit={(e) => handleLogin(e)}>
               <TextField
                 margin="normal"
@@ -164,7 +166,7 @@ const Login = () => {
             </form>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="/authentication/reset-password" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
