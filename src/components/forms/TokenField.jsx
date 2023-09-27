@@ -1,16 +1,17 @@
-import React, { useState } from "react";
-import TextField from "@mui/material/TextField";
+import { FormLabel } from "@mui/material";
 import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+import React from "react";
 
-const TokenField = () => {
-  const [tokens, setTokens] = useState(["", "", "", "", ""]);
-  const combinedTokens = tokens.join("");
+const TokenField = ({ setData }) => {
+  const [tokens, setTokens] = React.useState(["", "", "", "", ""]);
 
   const handleInputChange = (e, index) => {
     const { value } = e.target;
     const newTokens = [...tokens];
     newTokens[index] = value;
     setTokens(newTokens);
+    setData(newTokens.join(""));
 
     if (value === "" && index > 0) {
       const prevInput = document.getElementById(`token-${index - 1}`);
@@ -26,24 +27,27 @@ const TokenField = () => {
   };
 
   return (
-    <Grid container spacing={2}>
-      {tokens.map((token, index) => (
-        <Grid item xs={12 / 5} key={index}>
-          <TextField
-            id={`token-${index}`}
-            // label={`Token ${index + 1}`}
-            variant="outlined"
-            fullWidth
-            value={token}
-            onChange={(e) => handleInputChange(e, index)}
-            sx={{ input: { textAlign: "center" } }}
-            inputProps={{
-              maxLength: 1,
-            }}
-          />
-        </Grid>
-      ))}
-    </Grid>
+    <React.Fragment>
+      <FormLabel>Token</FormLabel>
+      <Grid container spacing={2}>
+        {tokens.map((token, index) => (
+          <Grid item xs={12 / 5} key={index}>
+            <TextField
+              id={`token-${index}`}
+              // label={`Token ${index + 1}`}
+              variant="outlined"
+              fullWidth
+              value={token}
+              onChange={(e) => handleInputChange(e, index)}
+              sx={{ input: { textAlign: "center" } }}
+              inputProps={{
+                maxLength: 1,
+              }}
+            />
+          </Grid>
+        ))}
+      </Grid>
+    </React.Fragment>
   );
 };
 

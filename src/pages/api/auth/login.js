@@ -12,12 +12,10 @@ async function loginRoute(req, res) {
       });
     }
     const { user, authentication } = response;
-    const { nik, name, role } = user;
-    const { accessToken } = authentication;
 
     req.session.user = {
-      id: response.user.id,
-      token: accessToken,
+      id: user.id,
+      token: authentication,
     };
 
     await req.session.save();

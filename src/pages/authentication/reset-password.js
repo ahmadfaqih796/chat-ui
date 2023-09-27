@@ -2,7 +2,13 @@ import CloseIcon from "@mui/icons-material/Close";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { Alert, Collapse, IconButton, InputAdornment } from "@mui/material";
+import {
+  Alert,
+  CircularProgress,
+  Collapse,
+  IconButton,
+  InputAdornment,
+} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -15,14 +21,20 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 import brand from "../../../public/next.svg";
+import TokenField from "@/components/forms/TokenField";
 
 const Login = () => {
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const [color, setColor] = React.useState("");
   const [message, setMessage] = React.useState("");
+  const [datax, setDatax] = React.useState();
+  const [token, setToken] = React.useState("");
+  const validation = router.query?.status && router.query?.email;
 
-  const handleLogin = async (event) => {
+  const handleGetOTP = async (event) => {
+    setLoading(true);
     setOpen(false);
     event.preventDefault();
     const { target } = event;
@@ -45,19 +57,84 @@ const Login = () => {
       const response = await fetching.json();
       console.log("rrrrrrrrrr", response);
       setOpen(true);
-      // if (response.code === 401) {
-      //   setColor("error");
-      //   setMessage(response.message);
-      //   return;
-      // }
+      setLoading(false);
+      if (response.code === 400) {
+        setColor("error");
+        setMessage(response.message);
+        return;
+      }
+      setDatax(response);
+      router.replace({
+        pathname: router.pathname,
+        query: {
+          email: email.value,
+          status: true,
+        },
+      });
       setColor("success");
-      setMessage(response.message || "Anda berhasil login");
-      router.replace("/home");
+      setMessage(
+        "Kode OTP sudah terkirim ke alamat Email, harap periksa dan masukkan kode OTPnya"
+      );
     } catch (error) {
       console.log("Error :", error);
       setColor("error");
       setMessage("Terjadi kesalahan pada server");
       setOpen(true);
+      setLoading(false);
+      return;
+    }
+  };
+
+  const handleNewPassword = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    setOpen(false);
+    const { target } = event;
+    const { email, password } = target;
+    const payload = {
+      action: "resetPwdShort",
+      value: {
+        user: {
+          email: router.query.email ?? email.value,
+        },
+        token: token,
+        password: password.value,
+      },
+    };
+    try {
+      const fetching = await fetch("/api/auth/management", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      const response = await fetching.json();
+      setOpen(true);
+      setLoading(false);
+      if (response.code === 400) {
+        setColor("error");
+        setMessage(response.message);
+        return;
+      }
+      router.replace({
+        pathname: "/authentication/login",
+        query: {
+          email: email.value,
+          status: true,
+        },
+      });
+      setColor("success");
+      setMessage(
+        response.message ??
+          "Password berhasil di reset harap kembali ke halaman Login"
+      );
+    } catch (error) {
+      console.log("Error :", error);
+      setColor("error");
+      setMessage("Terjadi kesalahan pada server");
+      setOpen(true);
+      setLoading(false);
       return;
     }
   };
@@ -91,7 +168,7 @@ const Login = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Reset Password
           </Typography>
           <Collapse in={open}>
             <Alert
@@ -115,25 +192,60 @@ const Login = () => {
             </Alert>
           </Collapse>
           <Box>
-            <form onSubmit={(e) => handleLogin(e)}>
+            <form
+              onSubmit={(e) =>
+                validation ? handleNewPassword(e) : handleGetOTP(e)
+              }
+            >
               <TextField
-                margin="normal"
-                required
-                fullWidth
                 id="email"
                 label="Email Address"
                 name="email"
-                autoComplete="email"
+                margin="normal"
+                required
+                fullWidth
+                disabled={validation ? true : false}
+                InputLabelProps={{
+                  shrink: validation ? true : false,
+                }}
+                value={router.query.email || ""}
+                // autoComplete="email"
                 autoFocus
               />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Kirim
-              </Button>
+              {validation && (
+                <>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="password"
+                    label="Password"
+                    name="password"
+                    autoComplete="password"
+                    autoFocus
+                  />
+                  <TokenField
+                    setData={(field) => {
+                      setToken(field);
+                    }}
+                  />
+                </>
+              )}
+
+              {loading ? (
+                <CircularProgress
+                  sx={{ marginLeft: "auto", marginRight: "auto" }}
+                />
+              ) : (
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Kirim
+                </Button>
+              )}
               <Button
                 fullWidth
                 variant="contained"
