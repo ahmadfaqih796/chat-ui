@@ -64,7 +64,7 @@ function SidebarContent() {
                 onClick={() => handleClick(index)}
                 selected={pathDirect === item.href}
               >
-                <ListItemIcon sx={{ ml: 0.5 }}>
+                <ListItemIcon sx={{ ml: 0.7 }}>
                   <FeatherIcon icon={item.icon} width="20" height="20" />
                 </ListItemIcon>
                 <ListItemText>
@@ -92,7 +92,7 @@ function SidebarContent() {
                             }
                       }
                     >
-                      <ListItemIcon sx={{ ml: 0.5 }}>
+                      <ListItemIcon sx={{ ml: 0.7 }}>
                         <FeatherIcon icon={child.icon} width="20" height="20" />
                       </ListItemIcon>
                       <ListItemText>
@@ -115,7 +115,7 @@ function SidebarContent() {
                   button
                   selected={pathDirect === item.href}
                 >
-                  <ListItemIcon sx={{ ml: 0.5 }}>
+                  <ListItemIcon sx={{ ml: 0.7 }}>
                     <FeatherIcon icon={item.icon} width="20" height="20" />
                   </ListItemIcon>
                   <ListItemText>

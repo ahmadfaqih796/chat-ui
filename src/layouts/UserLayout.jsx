@@ -1,9 +1,10 @@
-import { MainWrapper, PageWrapper } from "@/styles/Wrapper";
+import { MainWrapper, PageUserWrapper, PageWrapper } from "@/styles/Wrapper";
 import { Container, useMediaQuery } from "@mui/material";
 import Box from "@mui/material/Box";
 import React from "react";
 import Header from "./header/Header";
 import Sidebar from "./sidebar/Sidebar";
+import SidebarUser from "./sidebar/SidebarUser";
 
 function UserLayout({ children }) {
   const [open, setOpen] = React.useState(false);
@@ -19,21 +20,19 @@ function UserLayout({ children }) {
 
   return (
     <MainWrapper>
-      <Header
-        open={open}
-        handleDrawerOpen={handleDrawerOpen}
-        isMobile={isMobile}
-      />
-      <Sidebar
-        open={open}
-        handleDrawerClose={handleDrawerClose}
-        isMobile={isMobile}
-      />
-      <PageWrapper>
+      {isMobile && (
+        <Header
+          open={open}
+          handleDrawerOpen={handleDrawerOpen}
+          isMobile={isMobile}
+        />
+      )}
+      <SidebarUser />
+      <PageUserWrapper>
         <Container maxWidth={false}>
-          <Box sx={{ minHeight: "calc(100vh - 170px)", mt: 3 }}>{children}</Box>
+          <Box sx={{ minHeight: "calc(100vh - 0px)" }}>{children}</Box>
         </Container>
-      </PageWrapper>
+      </PageUserWrapper>
     </MainWrapper>
   );
 }
