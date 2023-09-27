@@ -1,37 +1,40 @@
+import { MainWrapper, PageWrapper } from "@/styles/Wrapper";
+import { Container, useMediaQuery } from "@mui/material";
 import Box from "@mui/material/Box";
-import { Container, experimentalStyled } from "@mui/material";
+import React from "react";
+import { Header, Sidebar } from ".";
 
-const MainWrapper = experimentalStyled("div")(() => ({
-  display: "flex",
-  minHeight: "100vh",
-  overflow: "hidden",
-  width: "100%",
-}));
+function AdminLayout({ children }) {
+  const [open, setOpen] = React.useState(false);
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
-const PageWrapper = experimentalStyled("div")(({ theme }) => ({
-  display: "flex",
-  flex: "1 1 auto",
-  overflow: "hidden",
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
 
-  backgroundColor: theme.palette.background.default,
-  [theme.breakpoints.up("lg")]: {
-    paddingTop: "64px",
-  },
-  [theme.breakpoints.down("lg")]: {
-    paddingTop: "64px",
-  },
-}));
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
-const AdminLayout = ({ children }) => {
   return (
     <MainWrapper>
+      <Header
+        open={open}
+        handleDrawerOpen={handleDrawerOpen}
+        isMobile={isMobile}
+      />
+      <Sidebar
+        open={open}
+        handleDrawerClose={handleDrawerClose}
+        isMobile={isMobile}
+      />
       <PageWrapper>
         <Container maxWidth={false}>
-          <Box sx={{ minHeight: "calc(100vh - 170px)", mt: 3 }}>{children}</Box>
+          <Box sx={{ minHeight: "calc(100vh - 170px)" }}>{children}</Box>
         </Container>
       </PageWrapper>
     </MainWrapper>
   );
-};
+}
 
 export default AdminLayout;
