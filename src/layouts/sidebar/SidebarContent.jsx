@@ -13,7 +13,7 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 import Menuitems from "./MenuItems";
 
-function SidebarContent() {
+function SidebarContent({ color }) {
   const [open, setOpen] = useState(-1); // Store the index of the open dropdown menu
   const router = useRouter();
 
@@ -65,7 +65,12 @@ function SidebarContent() {
                 selected={pathDirect === item.href}
               >
                 <ListItemIcon sx={{ ml: 0.7 }}>
-                  <FeatherIcon icon={item.icon} width="20" height="20" />
+                  <FeatherIcon
+                    color={color}
+                    icon={item.icon}
+                    width="20"
+                    height="20"
+                  />
                 </ListItemIcon>
                 <ListItemText>
                   <Typography>{item.title}</Typography>
@@ -93,7 +98,12 @@ function SidebarContent() {
                       }
                     >
                       <ListItemIcon sx={{ ml: 0.7 }}>
-                        <FeatherIcon icon={child.icon} width="20" height="20" />
+                        <FeatherIcon
+                          color={color}
+                          icon={child.icon}
+                          width="20"
+                          height="20"
+                        />
                       </ListItemIcon>
                       <ListItemText>
                         <Typography variant="body1">{child.title}</Typography>
@@ -116,7 +126,12 @@ function SidebarContent() {
                   selected={pathDirect === item.href}
                 >
                   <ListItemIcon sx={{ ml: 0.7 }}>
-                    <FeatherIcon icon={item.icon} width="20" height="20" />
+                    <FeatherIcon
+                      color={color}
+                      icon={item.icon}
+                      width="20"
+                      height="20"
+                    />
                   </ListItemIcon>
                   <ListItemText>
                     <Typography>{item.title}</Typography>

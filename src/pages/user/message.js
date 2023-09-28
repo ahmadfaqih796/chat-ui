@@ -1,3 +1,4 @@
+import ToggleColorMode from "@/components/theme/ToggleColorMode";
 import {
   Box,
   Card,
@@ -12,32 +13,7 @@ import React from "react";
 const Message = () => {
   return (
     <React.Fragment>
-      <Box>
-        <Card sx={{ p: 1, borderRadius: 2, maxWidth: "500px" }}>
-          <TextField
-            id="outlined-basic-email"
-            sx={{ "& fieldset": { border: "none" } }}
-            name="search"
-            // onChange={(e) => handleChange(e)}
-            size="small"
-            variant="outlined"
-            fullWidth
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="start">
-                  <IconButton
-                    sx={{ mr: "-20px" }}
-                    // onClick={keyPress}
-                  >
-                    <FeatherIcon icon="search" />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Card>
-        <Card></Card>
-      </Box>
+      <ToggleColorMode />
       <Typography>Hello World</Typography>
     </React.Fragment>
   );

@@ -28,7 +28,7 @@ const SidebarUser = () => {
             marginBottom: "16px",
           }}
         />
-        <SidebarContent />
+        <SidebarContent color={"white"} />
       </Box>
       <Box>
         <List component="li" disablePadding>

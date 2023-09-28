@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
-// import { amber, deepOrange, grey } from "@mui/material/colors";
+import { amber, deepOrange, grey, purple } from "@mui/material/colors";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import React from "react";
 
@@ -25,27 +25,34 @@ export function ColorModeProvider({ children }) {
       createTheme({
         palette: {
           mode,
-          // ...(mode === "light"
-          //   ? {
-          //       primary: amber,
-          //       divider: amber[200],
-          //       text: {
-          //         primary: grey[900],
-          //         secondary: grey[800],
-          //       },
-          //     }
-          //   : {
-          //       primary: deepOrange,
-          //       divider: deepOrange[700],
-          //       background: {
-          //         default: deepOrange[900],
-          //         paper: deepOrange[900],
-          //       },
-          //       text: {
-          //         primary: "#fff",
-          //         secondary: grey[500],
-          //       },
-          //     }),
+          ...(mode === "light"
+            ? {
+                primary: {
+                  main: purple[200],
+                  light: `linear-gradient(to top, ${purple[700]}, ${purple[300]} 70vh)`,
+                  dark: purple[400],
+                },
+                secondary: {
+                  main: "#402e8d",
+                },
+                divider: purple[200],
+                text: {
+                  primary: grey[900],
+                  secondary: grey[800],
+                },
+              }
+            : {
+                primary: deepOrange,
+                divider: deepOrange[700],
+                background: {
+                  default: deepOrange[900],
+                  paper: deepOrange[900],
+                },
+                text: {
+                  primary: "#fff",
+                  secondary: grey[500],
+                },
+              }),
         },
       }),
     [mode]

@@ -5,7 +5,8 @@ export const MainWrapper = experimentalStyled("div")(({ theme }) => ({
   minHeight: "100vh",
   overflow: "hidden",
   width: "100%",
-  background: theme.palette.mode == "dark" ? "black" : "#33cc33",
+  // background: theme.palette.mode == "dark" ? "black" : "#33cc33",
+  background: theme.palette.primary.light,
 }));
 
 export const PageWrapper = experimentalStyled("div")(({ theme }) => ({
@@ -29,5 +30,7 @@ export const PageUserWrapper = experimentalStyled("div")(({ theme }) => ({
   display: "flex",
   flex: "1 1 auto",
   overflow: "hidden",
-  borderColor: theme.palette.mode == "dark" ? "white" : "transparent",
+  background: theme.palette.mode === "light" ? "#FCF0FB" : "black",
+  borderTopLeftRadius: "4em",
+  borderBottomLeftRadius: "4em",
 }));

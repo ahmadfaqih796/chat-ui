@@ -30,7 +30,9 @@ function UserLayout({ children }) {
       <SidebarUser />
       <PageUserWrapper>
         <Container maxWidth={false}>
-          <Box sx={{ minHeight: "calc(100vh - 0px)" }}>{children}</Box>
+          <Box sx={{ minHeight: "calc(100vh - 0px)", padding: "1em" }}>
+            {children}
+          </Box>
         </Container>
       </PageUserWrapper>
     </MainWrapper>
