@@ -28,7 +28,7 @@ export function ColorModeProvider({ children }) {
           ...(mode === "light"
             ? {
                 primary: {
-                  main: purple[200],
+                  main: purple[50],
                   light: `linear-gradient(to top, ${purple[700]}, ${purple[300]} 70vh)`,
                   dark: purple[400],
                 },
