@@ -27,5 +27,11 @@ const Menuitems = [
     href: "/user/group",
     collapse: true,
   },
+  {
+    title: "Kalender",
+    icon: "grid",
+    href: "/user/kalender",
+    collapse: true,
+  },
 ];
 export default Menuitems;

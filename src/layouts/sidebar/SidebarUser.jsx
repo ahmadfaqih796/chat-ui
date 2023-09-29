@@ -1,4 +1,6 @@
+import { CustomSidebar } from "@/styles/Global";
 import {
+  Avatar,
   Box,
   List,
   ListItem,
@@ -6,19 +8,17 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import React from "react";
-import SidebarContent from "./SidebarContent";
-import brand from "../../../public/next.svg";
 import FeatherIcon from "feather-icons-react";
-import NextLink from "next/link";
 import Image from "next/image";
-import { CustomSidebar } from "@/styles/Global";
+import brand from "../../../public/next.svg";
+import SidebarContent from "./SidebarContent";
+import { stringAvatar } from "../header/stringAvatar";
 
 const SidebarUser = () => {
   return (
     <CustomSidebar>
       <Box>
-        <Image
+        {/* <Image
           src={brand}
           alt="bg"
           style={{
@@ -27,10 +27,17 @@ const SidebarUser = () => {
             padding: "24px",
             marginBottom: "16px",
           }}
+        /> */}
+        <Avatar
+          {...stringAvatar("Ahmad Faqih Arifin", 80)}
+          style={{ margin: "0 auto 1em" }}
         />
-        <SidebarContent color={"white"} />
+        <Typography textAlign="center">Ahmad Faqih Arifin</Typography>
+        <Box mt={6}>
+          <SidebarContent color={"white"} />
+        </Box>
       </Box>
-      <Box>
+      <Box sx={{}}>
         <List component="li" disablePadding>
           <ListItem
             // onClick={() => {

@@ -11,7 +11,7 @@ export const CustomSidebar = experimentalStyled("div")(({ theme }) => ({
   boxSizing: "border-box",
   borderTopRightRadius: "32px",
   borderBottomRightRadius: "32px",
-  paddingTop: "2em",
+  paddingTop: "3em",
   paddingBottom: "2em",
   color: "white",
   // background: theme.palette.mode == "dark" ? "black" : "white",
