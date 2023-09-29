@@ -18,13 +18,13 @@ const Menuitems = [
   {
     title: "Personal",
     icon: "grid",
-    href: "/chats",
+    href: "/user/message",
     collapse: true,
   },
   {
     title: "Grup",
     icon: "grid",
-    href: "/admin/customer-service",
+    href: "/user/group",
     collapse: true,
   },
 ];

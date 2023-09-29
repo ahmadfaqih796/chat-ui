@@ -30,7 +30,8 @@ export const PageUserWrapper = experimentalStyled("div")(({ theme }) => ({
   display: "flex",
   flex: "1 1 auto",
   overflow: "hidden",
-  background: theme.palette.mode === "light" ? "#FCF0FB" : "black",
+  // background: theme.palette.mode === "light" ? "#FCF0FB" : "black",
+  backgroundColor: theme.palette.primary.main,
   borderTopLeftRadius: "4em",
   borderBottomLeftRadius: "4em",
 }));

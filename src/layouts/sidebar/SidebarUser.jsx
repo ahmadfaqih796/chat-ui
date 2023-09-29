@@ -39,7 +39,12 @@ const SidebarUser = () => {
             button
           >
             <ListItemIcon sx={{ ml: 0.7 }}>
-              <FeatherIcon icon={"x"} width="20" height="20" />
+              <FeatherIcon
+                color="white"
+                icon={"log-out"}
+                width="20"
+                height="20"
+              />
             </ListItemIcon>
             <ListItemText>
               <Typography>Logout</Typography>

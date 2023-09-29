@@ -123,18 +123,60 @@ function SidebarContent({ color }) {
                     handleClick(index);
                   }}
                   button
-                  selected={pathDirect === item.href}
+                  // selected={pathDirect === item.href}
+                  sx={{
+                    ...(pathDirect === item.href && {
+                      backgroundColor: (theme) => theme.palette.primary.main,
+                      "&:hover": {
+                        backgroundColor: (theme) => theme.palette.primary.main,
+                      },
+                      "&:before": {
+                        content: "''",
+                        position: "absolute",
+                        width: "0",
+                        height: "0",
+                        borderTopLeftRadius: "100%",
+                        borderStyle: "solid",
+                        borderWidth: "24px 24px 0 0",
+                        borderColor: (theme) => theme.palette.primary.main,
+                        top: "-8px",
+                        right: "0",
+                      },
+                      "&:after": {
+                        content: "''",
+                        position: "absolute",
+                        width: "0",
+                        height: "0",
+                        borderBottomLeftRadius: "100%",
+                        borderStyle: "solid",
+                        borderWidth: "24px 24px 0 0",
+                        borderColor: (theme) => theme.palette.primary.main,
+                        bottom: "-8px",
+                        right: "0",
+                      },
+                    }),
+                  }}
                 >
                   <ListItemIcon sx={{ ml: 0.7 }}>
                     <FeatherIcon
-                      color={color}
+                      color={
+                        (pathDirect === item.href ? "black" : null) ?? color
+                      }
                       icon={item.icon}
                       width="20"
                       height="20"
                     />
                   </ListItemIcon>
                   <ListItemText>
-                    <Typography>{item.title}</Typography>
+                    <Typography
+                      sx={{
+                        ...(pathDirect === item.href && {
+                          color: "black",
+                        }),
+                      }}
+                    >
+                      {item.title}
+                    </Typography>
                   </ListItemText>
                 </ListItem>
               </NextLink>
