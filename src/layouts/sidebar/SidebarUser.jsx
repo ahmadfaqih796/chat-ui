@@ -37,28 +37,26 @@ const SidebarUser = () => {
           <SidebarContent color={"white"} />
         </Box>
       </Box>
-      <Box sx={{}}>
-        <List component="li" disablePadding>
-          <ListItem
-            // onClick={() => {
-            //   handleClick(index);
-            // }}
-            button
-          >
-            <ListItemIcon sx={{ ml: 0.7 }}>
-              <FeatherIcon
-                color="white"
-                icon={"log-out"}
-                width="20"
-                height="20"
-              />
-            </ListItemIcon>
-            <ListItemText>
-              <Typography>Logout</Typography>
-            </ListItemText>
-          </ListItem>
-        </List>
-      </Box>
+      <List component="li" disablePadding>
+        <ListItem
+          // onClick={() => {
+          //   handleClick(index);
+          // }}
+          button
+        >
+          <ListItemIcon sx={{ ml: 0.7 }}>
+            <FeatherIcon
+              color="white"
+              icon={"log-out"}
+              width="20"
+              height="20"
+            />
+          </ListItemIcon>
+          <ListItemText>
+            <Typography>Logout</Typography>
+          </ListItemText>
+        </ListItem>
+      </List>
     </CustomSidebar>
   );
 };
