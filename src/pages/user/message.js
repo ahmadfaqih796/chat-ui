@@ -32,19 +32,6 @@ const Message = () => {
       },
     });
     setOnlineUsers(data);
-    // const userData = data.map((row) => ({
-    //   id_user: row?.id_user,
-    //   name: row?.user_admin?.nama_admin || row?.user_siswa?.nama_siswa,
-    //   photo: row?.user_admin?.photo || row?.user_siswa?.photo,
-    //   role: row?.role,
-    //   status: false,
-    // }));
-    // console.log(userData);
-    // setOnlineUsers(userData);
-    // socket.emit("user-active", { id: session.id });
-    // socket.on("update-online", (data) => {
-    //   setActive(data);
-    // });
   };
 
   React.useEffect(() => {

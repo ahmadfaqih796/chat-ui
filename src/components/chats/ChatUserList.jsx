@@ -1,7 +1,5 @@
 import {
   Box,
-  Card,
-  IconButton,
   InputAdornment,
   List,
   ListItem,
@@ -10,7 +8,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
 import FeatherIcon from "feather-icons-react";
 import CustomImage from "../custom/CustomImage";
 
@@ -59,7 +56,6 @@ const ChatUserList = ({ setSearch, data }) => {
                 onClick ? handlePush(e, row.id) : null;
               }}
               sx={{
-                // background: row.id_user == session.receiver ? "#E4F1FF" : null,
                 background: "white",
                 borderRadius: "1em",
                 mb: "1em",
@@ -83,7 +79,6 @@ const ChatUserList = ({ setSearch, data }) => {
             </ListItem>
           ))}
       </List>
-      asas
     </Box>
   );
 };
