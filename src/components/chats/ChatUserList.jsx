@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import FeatherIcon from "feather-icons-react";
+import CustomImage from "../custom/CustomImage";
 
 const ChatUserList = ({ setSearch, data }) => {
   const handleSearch = (e) => {
@@ -32,6 +33,7 @@ const ChatUserList = ({ setSearch, data }) => {
           padding: "0.5em 1em",
           borderRadius: "1em",
           background: "white",
+          mb: 1,
         }}
         InputProps={{
           disableUnderline: true,
@@ -56,13 +58,16 @@ const ChatUserList = ({ setSearch, data }) => {
               onClick={(e) => {
                 onClick ? handlePush(e, row.id) : null;
               }}
-              //   sx={{
-              //     background: row.id_user == session.receiver ? "#E4F1FF" : null,
-              //   }}
+              sx={{
+                // background: row.id_user == session.receiver ? "#E4F1FF" : null,
+                background: "white",
+                borderRadius: "1em",
+                mb: "1em",
+              }}
             >
-              {/* <ListItemIcon>
-              <CustomImage src={row.photo} alt={row.name} margin="0" />
-            </ListItemIcon> */}
+              <ListItemIcon>
+                <CustomImage src={row.photo} alt={row.name} margin="0" />
+              </ListItemIcon>
               <ListItemText primary={row.name} secondary={"test chat gan !"} />
               <ListItemText
                 primary={
