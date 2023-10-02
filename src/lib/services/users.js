@@ -9,7 +9,6 @@ export async function getUser(token, queries) {
       ...queries,
     },
   });
-  console.log("ddddddddddddd", data);
   return data;
 }
 
