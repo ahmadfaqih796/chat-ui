@@ -13,6 +13,7 @@ import Image from "next/image";
 import brand from "../../../public/next.svg";
 import SidebarContent from "./SidebarContent";
 import { stringAvatar } from "../header/stringAvatar";
+import ToggleColorMode from "@/components/theme/ToggleColorMode";
 
 const SidebarUser = () => {
   return (
@@ -38,12 +39,8 @@ const SidebarUser = () => {
         </Box>
       </Box>
       <List component="li" disablePadding>
-        <ListItem
-          // onClick={() => {
-          //   handleClick(index);
-          // }}
-          button
-        >
+        <ToggleColorMode />
+        <ListItem button>
           <ListItemIcon sx={{ ml: 0.7 }}>
             <FeatherIcon
               color="white"

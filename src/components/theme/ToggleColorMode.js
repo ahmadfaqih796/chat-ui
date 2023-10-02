@@ -1,18 +1,12 @@
-// ToggleColorMode.js
-import React, { useContext } from "react";
-import { ColorModeContext } from "./ColorModeProvider";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
 import {
-  FormControlLabel,
   ListItem,
   ListItemIcon,
   ListItemText,
-  Switch,
   Typography,
-  experimentalStyled,
 } from "@mui/material";
 import FeatherIcon from "feather-icons-react";
+import { useContext } from "react";
+import { ColorModeContext } from "./ColorModeProvider";
 
 function ToggleColorMode() {
   const { toggleColorMode, theme } = useContext(ColorModeContext);
