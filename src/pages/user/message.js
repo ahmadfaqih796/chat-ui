@@ -1,4 +1,5 @@
 import ChatBlankLayout from "@/components/chats/ChatBlankLayout";
+import ChatInput from "@/components/chats/ChatInput";
 import ChatUserList from "@/components/chats/ChatUserList";
 import WithAuth from "@/lib/session/withAuth";
 import { Grid, TextField } from "@mui/material";
@@ -49,6 +50,13 @@ const Message = () => {
       </Grid>
       <Grid item md={8}>
         <ChatBlankLayout />
+        <ChatInput
+        // session={session}
+        // personal={personal}
+        // file={file}
+        // setFile={(field) => setFile(field)}
+        // grup={grup}
+        />
       </Grid>
     </Grid>
   );
