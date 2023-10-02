@@ -4,18 +4,13 @@ import { withSessionRoute } from "@/lib/session/withSession";
 async function loginRoute(req, res) {
   try {
     const response = await loginService(req.body);
-    if (response.code === 401) {
-      return res.json({
-        success: false,
-        message: response.message,
-        code: response.code,
-      });
-    }
-    const { user, authentication } = response;
+
+    const { name } = response.user;
 
     req.session.user = {
-      id: user.id,
-      token: authentication,
+      id: response.user.id,
+      name: name,
+      token: response.accessToken,
     };
 
     await req.session.save();
@@ -23,14 +18,17 @@ async function loginRoute(req, res) {
     return res.json({
       success: true,
       message: "Berhasil login",
-      data: req.session.user,
+      name: name,
     });
   } catch (error) {
     console.log(error);
     const e = error.toString();
+
+    // handle error from api with response api
     if (error?.response) {
       return res.status(500).json(error.response.data);
     }
+    //  handle if error job level === 1 or job level === staff
     return res.status(400).json({
       message: e,
     });

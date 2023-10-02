@@ -1,14 +1,23 @@
 import ServiceAdapter from ".";
 
-const service = ServiceAdapter();
-export const getAllUser = async (token, params = {}) => {
-  const response = await service.fetchJson(`users`, {
+export async function getUser(token, queries) {
+  const { data } = await ServiceAdapter().get("/users", {
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
     },
-    params: params,
+    params: {
+      ...queries,
+    },
   });
-  console.log("xxxxxxxxxxx", response);
-  return response;
-};
+  console.log("ddddddddddddd", data);
+  return data;
+}
+
+export async function getOneUser(id, token) {
+  const { data } = await ServiceAdapter().get(`/users/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data;
+}

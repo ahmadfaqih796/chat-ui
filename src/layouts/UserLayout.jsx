@@ -1,14 +1,16 @@
-import { MainWrapper, PageUserWrapper, PageWrapper } from "@/styles/Wrapper";
+import { MainWrapper, PageUserWrapper } from "@/styles/Wrapper";
 import { Container, useMediaQuery } from "@mui/material";
 import Box from "@mui/material/Box";
 import React from "react";
 import Header from "./header/Header";
-import Sidebar from "./sidebar/Sidebar";
 import SidebarUser from "./sidebar/SidebarUser";
+import { useUserSession } from "@/hooks/auth/useUserSession";
 
 function UserLayout({ children }) {
   const [open, setOpen] = React.useState(false);
   const isMobile = useMediaQuery("(max-width: 600px)");
+  const { data, error } = useUserSession();
+  console.log("xxxxxxxxxxxxxxx", data, error);
 
   const handleDrawerOpen = () => {
     setOpen(true);

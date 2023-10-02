@@ -14,8 +14,15 @@ import brand from "../../../public/next.svg";
 import SidebarContent from "./SidebarContent";
 import { stringAvatar } from "../header/stringAvatar";
 import ToggleColorMode from "@/components/theme/ToggleColorMode";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 const SidebarUser = () => {
+  const router = useRouter();
+  const handleLogout = async () => {
+    await axios.post("/api/auth/logout");
+    router.push("/authentication/login");
+  };
   return (
     <CustomSidebar>
       <Box>
@@ -40,7 +47,7 @@ const SidebarUser = () => {
       </Box>
       <List component="li" disablePadding>
         <ToggleColorMode />
-        <ListItem button>
+        <ListItem button onClick={() => handleLogout()}>
           <ListItemIcon sx={{ ml: 0.7 }}>
             <FeatherIcon
               color="white"

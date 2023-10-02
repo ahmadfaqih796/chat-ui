@@ -15,50 +15,14 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 import brand from "../../../public/next.svg";
+import useUserLogin from "@/hooks/auth/useUserLogin";
 
 const Login = () => {
   const router = useRouter();
   const [passwordVisible, setPasswordVisible] = React.useState(false);
-  const [open, setOpen] = React.useState(false);
-  const [color, setColor] = React.useState("");
-  const [message, setMessage] = React.useState("");
 
-  const handleLogin = async (event) => {
-    setOpen(false);
-    event.preventDefault();
-    const { target } = event;
-    const { email, password } = target;
-    const data = {
-      email: email.value,
-      password: password.value,
-      strategy: "local",
-    };
-    try {
-      const fetching = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      const response = await fetching.json();
-      setOpen(true);
-      if (response.code === 401) {
-        setColor("error");
-        setMessage(response.message);
-        return;
-      }
-      setColor("success");
-      setMessage(response.message || "Anda berhasil login");
-      router.replace("/home");
-    } catch (error) {
-      console.log("Error :", error);
-      setColor("error");
-      setMessage("Terjadi kesalahan pada server");
-      setOpen(true);
-      return;
-    }
-  };
+  const { loading, handleLogin, color, message, open, setOpen } =
+    useUserLogin();
   return (
     <Box
       display="flex"
@@ -156,6 +120,7 @@ const Login = () => {
               <Button
                 type="submit"
                 fullWidth
+                disabled={loading}
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
