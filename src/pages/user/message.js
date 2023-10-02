@@ -1,3 +1,4 @@
+import ChatBlankLayout from "@/components/chats/ChatBlankLayout";
 import ChatUserList from "@/components/chats/ChatUserList";
 import WithAuth from "@/lib/session/withAuth";
 import { Grid, TextField } from "@mui/material";
@@ -39,7 +40,7 @@ const Message = () => {
   }, [search]);
 
   return (
-    <Grid container>
+    <Grid container spacing={4}>
       <Grid item md={4}>
         <ChatUserList
           setSearch={(field) => setSearch(field)}
@@ -47,7 +48,7 @@ const Message = () => {
         />
       </Grid>
       <Grid item md={8}>
-        <TextField />
+        <ChatBlankLayout />
       </Grid>
     </Grid>
   );
