@@ -1,10 +1,16 @@
 import ChatBlankLayout from "@/components/chats/ChatBlankLayout";
 import ChatInput from "@/components/chats/ChatInput";
 import ChatUserList from "@/components/chats/ChatUserList";
+import useFetchUser from "@/hooks/fetch/useFetchUser";
 import WithAuth from "@/lib/session/withAuth";
 import { Grid, TextField } from "@mui/material";
 import axios from "axios";
 import React from "react";
+import io from "socket.io-client";
+
+const socket = io("http://localhost:3030", {
+  path: "/ws/",
+});
 
 export const getServerSideProps = WithAuth(async function ({ req, query }) {
   const { id, name, token } = req.session.user;
@@ -19,32 +25,17 @@ export const getServerSideProps = WithAuth(async function ({ req, query }) {
   };
 });
 
-const Message = () => {
+const Message = ({ session }) => {
   const [search, setSearch] = React.useState([]);
   const [onlineUsers, setOnlineUsers] = React.useState([]);
   console.log(onlineUsers);
-
-  const fetchUserData = async () => {
-    const { data } = await axios.get(`/api/users`, {
-      params: {
-        $limit: -1,
-        ...(search && {
-          "name[$like]": `%${search}%`,
-        }),
-      },
-    });
-    setOnlineUsers(data);
-  };
-
-  React.useEffect(() => {
-    fetchUserData();
-  }, [search]);
 
   return (
     <Grid container spacing={4}>
       <Grid item md={4}>
         <ChatUserList
           setSearch={(field) => setSearch(field)}
+          session={session}
           data={onlineUsers}
         />
       </Grid>

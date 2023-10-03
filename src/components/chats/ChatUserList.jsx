@@ -10,11 +10,13 @@ import {
 } from "@mui/material";
 import FeatherIcon from "feather-icons-react";
 import CustomImage from "../custom/CustomImage";
+import useFetchUser from "@/hooks/fetch/useFetchUser";
 
-const ChatUserList = ({ setSearch, data }) => {
+const ChatUserList = ({ setSearch, data, session }) => {
+  const { userList, loading, setTempQuery } = useFetchUser(session.token);
   const handleSearch = (e) => {
     e.preventDefault();
-    setSearch(e.target.value);
+    setTempQuery(e.target.value);
   };
 
   return (
@@ -41,6 +43,7 @@ const ChatUserList = ({ setSearch, data }) => {
           ),
         }}
       />
+      {loading && <p>Loading...</p>}
       <List
         sx={{
           minHeight: "calc(100vh - 270px)",
@@ -48,8 +51,8 @@ const ChatUserList = ({ setSearch, data }) => {
           scrollBehavior: "smooth",
         }}
       >
-        {data &&
-          data.map((row, index) => (
+        {userList &&
+          userList.map((row, index) => (
             <ListItem
               key={index}
               onClick={(e) => {
