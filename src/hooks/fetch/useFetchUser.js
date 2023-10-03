@@ -18,12 +18,11 @@ const useFetchUser = (token) => {
   useEffect(() => {
     let active = true;
 
-    // if (query !== "") {
+    if (loading) {
+      setShow(false);
+      return undefined;
+    }
 
-    // } else {
-    //   setUserList([]);
-    //   setLoading(false);
-    // }
     (async () => {
       const response = await getUser(token, {
         ...(query && {

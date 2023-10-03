@@ -1,5 +1,6 @@
 import {
   Box,
+  Grow,
   InputAdornment,
   List,
   ListItem,
@@ -13,7 +14,7 @@ import CustomImage from "../custom/CustomImage";
 import useFetchUser from "@/hooks/fetch/useFetchUser";
 
 const ChatUserList = ({ setSearch, data, session }) => {
-  const { userList, loading, setTempQuery } = useFetchUser(session.token);
+  const { userList, show, loading, setTempQuery } = useFetchUser(session.token);
   const handleSearch = (e) => {
     e.preventDefault();
     setTempQuery(e.target.value);
@@ -53,33 +54,37 @@ const ChatUserList = ({ setSearch, data, session }) => {
       >
         {userList &&
           userList.map((row, index) => (
-            <ListItem
-              key={index}
-              onClick={(e) => {
-                onClick ? handlePush(e, row.id) : null;
-              }}
-              sx={{
-                background: "white",
-                borderRadius: "1em",
-                mb: "1em",
-              }}
-            >
-              <ListItemIcon>
-                <CustomImage src={row.photo} alt={row.name} margin="0" />
-              </ListItemIcon>
-              <ListItemText primary={row.name} secondary={"test chat gan !"} />
-              <ListItemText
-                primary={
-                  <Typography
-                    variant="body2"
-                    style={{ color: row.status ? "green" : "red" }}
-                  >
-                    {row.status ? "online" : "offline"}
-                  </Typography>
-                }
-                align="right"
-              ></ListItemText>
-            </ListItem>
+            <Grow in={show} key={row.id} timeout={500}>
+              <ListItem
+                onClick={(e) => {
+                  onClick ? handlePush(e, row.id) : null;
+                }}
+                sx={{
+                  background: "white",
+                  borderRadius: "1em",
+                  mb: "1em",
+                }}
+              >
+                <ListItemIcon>
+                  <CustomImage src={row.photo} alt={row.name} margin="0" />
+                </ListItemIcon>
+                <ListItemText
+                  primary={row.name}
+                  secondary={"test chat gan !"}
+                />
+                <ListItemText
+                  primary={
+                    <Typography
+                      variant="body2"
+                      style={{ color: row.status ? "green" : "red" }}
+                    >
+                      {row.status ? "online" : "offline"}
+                    </Typography>
+                  }
+                  align="right"
+                ></ListItemText>
+              </ListItem>
+            </Grow>
           ))}
       </List>
     </Box>
