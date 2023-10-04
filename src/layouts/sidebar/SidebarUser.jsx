@@ -1,3 +1,4 @@
+import ToggleColorMode from "@/components/theme/ToggleColorMode";
 import { CustomSidebar } from "@/styles/Global";
 import {
   Avatar,
@@ -8,14 +9,11 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import FeatherIcon from "feather-icons-react";
-import Image from "next/image";
-import brand from "../../../public/next.svg";
-import SidebarContent from "./SidebarContent";
-import { stringAvatar } from "../header/stringAvatar";
-import ToggleColorMode from "@/components/theme/ToggleColorMode";
 import axios from "axios";
+import FeatherIcon from "feather-icons-react";
 import { useRouter } from "next/router";
+import { stringAvatar } from "../header/stringAvatar";
+import SidebarContent from "./SidebarContent";
 
 const SidebarUser = () => {
   const router = useRouter();
@@ -26,16 +24,6 @@ const SidebarUser = () => {
   return (
     <CustomSidebar>
       <Box>
-        {/* <Image
-          src={brand}
-          alt="bg"
-          style={{
-            width: "100%",
-            height: "auto",
-            padding: "24px",
-            marginBottom: "16px",
-          }}
-        /> */}
         <Avatar
           {...stringAvatar("Ahmad Faqih Arifin", 80)}
           style={{ margin: "0 auto 1em" }}

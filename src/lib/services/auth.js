@@ -1,6 +1,6 @@
 import ServiceAdapter from ".";
 
-export async function loginService(data, options = {}) {
+export async function loginService(data) {
   const { data: response } = await ServiceAdapter().post(
     "/authentication",
     data
@@ -8,7 +8,7 @@ export async function loginService(data, options = {}) {
   return response;
 }
 
-export const ManagementService = async (data, token) => {
+export const ManagementService = async (data) => {
   const service = ServiceAdapter();
   const response = await service.fetchJson("auth-management", {
     method: "POST",

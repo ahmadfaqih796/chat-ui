@@ -39,7 +39,7 @@ const useFetchUser = (token) => {
     return () => {
       active = false;
     };
-  }, [token, query]);
+  }, [loading, token, query]);
 
   useEffect(() => {
     (async () => {

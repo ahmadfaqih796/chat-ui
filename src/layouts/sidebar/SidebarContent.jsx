@@ -30,11 +30,6 @@ function SidebarContent({ color }) {
     return open === index;
   };
 
-  const handleTitle = (title) => {
-    // Handle setting the title when a dropdown menu item is clicked
-    // You can implement your logic here
-  };
-
   const pathDirect = router.asPath;
 
   return (

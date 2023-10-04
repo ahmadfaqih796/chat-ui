@@ -1,27 +1,17 @@
+import TokenField from "@/components/forms/TokenField";
 import CloseIcon from "@mui/icons-material/Close";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import {
-  Alert,
-  CircularProgress,
-  Collapse,
-  IconButton,
-  InputAdornment,
-} from "@mui/material";
+import { Alert, CircularProgress, Collapse, IconButton } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 import brand from "../../../public/next.svg";
-import TokenField from "@/components/forms/TokenField";
 
 const Login = () => {
   const router = useRouter();
@@ -29,7 +19,6 @@ const Login = () => {
   const [loading, setLoading] = React.useState(false);
   const [color, setColor] = React.useState("");
   const [message, setMessage] = React.useState("");
-  const [datax, setDatax] = React.useState();
   const [token, setToken] = React.useState("");
   const validation = router.query?.status && router.query?.email;
 
@@ -63,7 +52,6 @@ const Login = () => {
         setMessage(response.message);
         return;
       }
-      setDatax(response);
       router.replace({
         pathname: router.pathname,
         query: {

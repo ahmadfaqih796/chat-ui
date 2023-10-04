@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
-import { amber, deepOrange, grey, purple } from "@mui/material/colors";
+import { deepOrange, grey, purple } from "@mui/material/colors";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import React from "react";
 

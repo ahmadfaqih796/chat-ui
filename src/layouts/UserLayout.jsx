@@ -16,10 +16,6 @@ function UserLayout({ children }) {
     setOpen(true);
   };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
   return (
     <MainWrapper>
       {isMobile && (

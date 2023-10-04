@@ -1,10 +1,9 @@
-import Box from "@mui/material/Box";
 import MenuIcon from "@mui/icons-material/Menu";
-import Button from "@mui/material/Button";
+import { IconButton } from "@mui/material";
+import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import React from "react";
 import SidebarContent from "./SidebarContent";
-import { IconButton } from "@mui/material";
 
 const SidebarSwipeable = () => {
   const [state, setState] = React.useState({

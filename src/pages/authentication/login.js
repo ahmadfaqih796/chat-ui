@@ -1,3 +1,4 @@
+import useUserLogin from "@/hooks/auth/useUserLogin";
 import CloseIcon from "@mui/icons-material/Close";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -12,13 +13,10 @@ import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import React from "react";
 import brand from "../../../public/next.svg";
-import useUserLogin from "@/hooks/auth/useUserLogin";
 
 const Login = () => {
-  const router = useRouter();
   const [passwordVisible, setPasswordVisible] = React.useState(false);
 
   const { loading, handleLogin, color, message, open, setOpen } =

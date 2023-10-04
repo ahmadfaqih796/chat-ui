@@ -1,3 +1,4 @@
+import useFetchUser from "@/hooks/fetch/useFetchUser";
 import {
   Box,
   Grow,
@@ -10,10 +11,12 @@ import {
   Typography,
 } from "@mui/material";
 import FeatherIcon from "feather-icons-react";
+import Image from "next/image";
+import NotFound from "../../../public/assets/images/no-data-found.png";
 import CustomImage from "../custom/CustomImage";
-import useFetchUser from "@/hooks/fetch/useFetchUser";
+import SkeletonUser from "../skeleton/SkeletonUser";
 
-const ChatUserList = ({ setSearch, data, session }) => {
+const ChatUserList = ({ session }) => {
   const { userList, show, loading, setTempQuery } = useFetchUser(session.token);
   const handleSearch = (e) => {
     e.preventDefault();
@@ -44,20 +47,35 @@ const ChatUserList = ({ setSearch, data, session }) => {
           ),
         }}
       />
-      {loading && <p>Loading...</p>}
+
       <List
         sx={{
-          minHeight: "calc(100vh - 270px)",
+          maxHeight: "calc(100vh - 170px)",
           overflow: "auto",
-          scrollBehavior: "smooth",
+          "&::-webkit-scrollbar": {
+            width: 0,
+          },
         }}
       >
-        {userList &&
-          userList.map((row, index) => (
+        {loading ? (
+          <SkeletonUser />
+        ) : userList.length === 0 ? (
+          <Image
+            alt="not found"
+            src={NotFound}
+            width={0}
+            height={0}
+            style={{
+              width: "100%",
+              height: "100%",
+            }}
+          />
+        ) : (
+          userList.map((row) => (
             <Grow in={show} key={row.id} timeout={500}>
               <ListItem
                 onClick={(e) => {
-                  onClick ? handlePush(e, row.id) : null;
+                  handlePush(e, row.id);
                 }}
                 sx={{
                   background: "white",
@@ -74,18 +92,17 @@ const ChatUserList = ({ setSearch, data, session }) => {
                 />
                 <ListItemText
                   primary={
-                    <Typography
-                      variant="body2"
-                      style={{ color: row.status ? "green" : "red" }}
-                    >
-                      {row.status ? "online" : "offline"}
+                    <Typography variant="body2" style={{ color: "green" }}>
+                      {/* {row.status ? "online" : "offline"} */}
+                      Online
                     </Typography>
                   }
                   align="right"
                 ></ListItemText>
               </ListItem>
             </Grow>
-          ))}
+          ))
+        )}
       </List>
     </Box>
   );

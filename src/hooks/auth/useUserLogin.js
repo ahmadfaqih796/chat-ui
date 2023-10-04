@@ -33,7 +33,7 @@ const useUserLogin = () => {
     };
 
     try {
-      const { data: res } = await Axios.post("/api/auth/login", data);
+      await Axios.post("/api/auth/login", data);
       setColor("success");
       setMessage("Berhasil login");
       setOpen(true);

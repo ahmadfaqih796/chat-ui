@@ -28,7 +28,6 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 function Header({ open, handleDrawerOpen, isMobile }) {
-  const drawerWidth = isMobile ? 0 : 240;
   return (
     <AppBar
       position="fixed"

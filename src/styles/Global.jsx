@@ -1,6 +1,6 @@
 import { experimentalStyled } from "@mui/material";
 
-export const CustomSidebar = experimentalStyled("div")(({ theme }) => ({
+export const CustomSidebar = experimentalStyled("div")(() => ({
   width: 240,
   height: "100vh",
   flexShrink: 0,
