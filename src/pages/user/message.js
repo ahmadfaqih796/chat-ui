@@ -5,8 +5,6 @@ import WithAuth from "@/lib/session/withAuth";
 import { Grid } from "@mui/material";
 
 export const getServerSideProps = WithAuth(async function ({ req, query }) {
-  const { name } = req.session.user;
-  console.log("ttttttt", name);
   return {
     props: {
       session: {

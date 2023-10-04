@@ -15,12 +15,24 @@ import Image from "next/image";
 import NotFound from "../../../public/assets/images/no-data-found.png";
 import CustomImage from "../custom/CustomImage";
 import SkeletonUser from "../skeleton/SkeletonUser";
+import { useRouter } from "next/router";
 
 const ChatUserList = ({ session }) => {
+  const router = useRouter();
   const { userList, show, loading, setTempQuery } = useFetchUser(session.token);
   const handleSearch = (e) => {
     e.preventDefault();
     setTempQuery(e.target.value);
+  };
+  const handlePush = async (e, field) => {
+    e.preventDefault();
+    router.replace({
+      pathname: "/user/message",
+      query: {
+        id_user: session.id,
+        id_receiver: field,
+      },
+    });
   };
 
   return (
