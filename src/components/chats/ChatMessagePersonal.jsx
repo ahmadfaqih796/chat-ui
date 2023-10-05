@@ -37,7 +37,12 @@ const ChatMessagePersonal = ({ data, session }) => {
         padding: "0.5em",
         borderRadius: (theme) => theme.palette.borderRadius,
         "&::-webkit-scrollbar": {
-          width: 0,
+          width: "0.5em",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: (theme) => theme.palette.primary.dark,
+          outline: `1px solid slategrey`,
+          borderRadius: "1em",
         },
       }}
     >
