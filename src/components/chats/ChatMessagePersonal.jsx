@@ -1,11 +1,8 @@
 import { stringAvatar } from "@/layouts/header/stringAvatar";
-import { BASE_API_URL } from "@/utils/baseUrl";
 import { Avatar, Box, List, Typography } from "@mui/material";
-import FeatherIcon from "feather-icons-react";
 import moment from "moment/moment";
 import Image from "next/image";
 import React from "react";
-import fileImg from "../../../assets/images/file.svg";
 
 const ChatMessagePersonal = ({ data, session }) => {
   const scrollRef = React.useRef(null);
@@ -31,6 +28,7 @@ const ChatMessagePersonal = ({ data, session }) => {
         overflowY: "auto",
         overflowX: "hidden",
         scrollBehavior: "smooth",
+        backgroundColor: "white",
       }}
     >
       {data &&
@@ -58,7 +56,7 @@ const ChatMessagePersonal = ({ data, session }) => {
                     session.id == row.id_sender ? "flex-end" : null,
                 }}
               >
-                {!row.is_deleted && row.file_url ? (
+                {/* {!row.is_deleted && row.file_url ? (
                   fileType(row.file_type) === "image" ? (
                     <Image
                       id="file"
@@ -127,7 +125,7 @@ const ChatMessagePersonal = ({ data, session }) => {
                       </Typography>
                     </Box>
                   )
-                ) : null}
+                ) : null} */}
               </Box>
               <Box
                 sx={{
