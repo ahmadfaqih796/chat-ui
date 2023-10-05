@@ -179,7 +179,9 @@ const ChatMessagePersonal = ({ data, session }) => {
                         "anonymus"}
                     </Typography>
                   )}
-
+                  <Box>
+                    {row.is_deleted ? "Pesan ini sudah dihapus" : row.text}
+                  </Box>
                   <Box
                     sx={{
                       mt: -1,
