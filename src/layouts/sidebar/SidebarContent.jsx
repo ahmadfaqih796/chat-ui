@@ -163,7 +163,9 @@ function SidebarContent({ color }) {
                   <ListItemIcon sx={{ ml: 0.7 }}>
                     <FeatherIcon
                       color={
-                        (pathDirect === item.href ? "black" : null) ?? color
+                        (pathDirect === item.href
+                          ? (theme) => theme.palette.text.primary
+                          : null) ?? color
                       }
                       icon={item.icon}
                       width="20"
@@ -174,7 +176,7 @@ function SidebarContent({ color }) {
                     <Typography
                       sx={{
                         ...(pathDirect === item.href && {
-                          color: "black",
+                          color: (theme) => theme.palette.text.primary,
                         }),
                       }}
                     >

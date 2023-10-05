@@ -32,6 +32,7 @@ export const PageUserWrapper = experimentalStyled("div")(({ theme }) => ({
   overflow: "hidden",
   // background: theme.palette.mode === "light" ? "#FCF0FB" : "black",
   backgroundColor: theme.palette.primary.main,
+  color: theme.palette.text.primary,
   borderTopLeftRadius: "4em",
   borderBottomLeftRadius: "4em",
 }));

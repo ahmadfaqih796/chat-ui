@@ -41,7 +41,7 @@ const ChatInput = ({ session }) => {
           alignItems: "center",
           p: 2,
           mt: 2,
-          background: "white",
+          background: (theme) => theme.palette.background.default,
           borderRadius: (theme) => theme.palette.borderRadius,
         }}
       >

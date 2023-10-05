@@ -33,27 +33,37 @@ export function ColorModeProvider({ children }) {
                   dark: purple[400],
                 },
                 secondary: {
-                  main: "#402e8d",
+                  main: "#fff",
+                  light: "#fff",
+                  dark: "#fff",
                 },
                 divider: purple[200],
                 borderRadius: "1em",
-                text: {
-                  primary: grey[900],
-                  secondary: grey[800],
-                },
+                // text: {
+                //   primary: "#fff",
+                //   secondary: grey[800],
+                // },
               }
             : {
-                primary: deepOrange,
-                divider: deepOrange[700],
-                background: {
-                  default: deepOrange[900],
-                  paper: deepOrange[900],
+                primary: {
+                  main: "#330e62",
+                  light: `linear-gradient(to top, #4a148c, #6e43a3 70vh)`,
+                  dark: "#330e62",
                 },
-                borderRadius: "1em",
+                divider: "#330e62",
+                background: {
+                  default: "#6e43a3",
+                  paper: "#6e43a3",
+                },
                 text: {
                   primary: "#fff",
-                  secondary: grey[500],
+                  secondary: "#fff",
                 },
+                borderRadius: "1em",
+                // text: {
+                //   primary: "#fff",
+                //   secondary: grey[500],
+                // },
               }),
         },
       }),

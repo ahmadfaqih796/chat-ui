@@ -33,7 +33,7 @@ const ChatMessagePersonal = ({ data, session }) => {
         overflowY: "auto",
         overflowX: "hidden",
         scrollBehavior: "smooth",
-        backgroundColor: "white",
+        background: (theme) => theme.palette.background.default,
         padding: "0.5em",
         borderRadius: (theme) => theme.palette.borderRadius,
         "&::-webkit-scrollbar": {

@@ -10,7 +10,7 @@ const ChatBlankLayout = () => {
         justifyContent: "center",
         alignItems: "center",
         borderRadius: (theme) => theme.palette.borderRadius,
-        background: "white",
+        background: (theme) => theme.palette.background.default,
       }}
     >
       Selamat datang di fitur chat kami ^_^

@@ -47,14 +47,18 @@ const ChatUserList = ({ session }) => {
         sx={{
           padding: "0.5em 1em",
           borderRadius: (theme) => theme.palette.borderRadius,
-          background: "white",
+          background: (theme) => theme.palette.background.default,
           mb: 1,
         }}
         InputProps={{
           disableUnderline: true,
           endAdornment: (
             <InputAdornment position="end">
-              <FeatherIcon color="black" icon={"search"} width="20" />
+              <FeatherIcon
+                color={(theme) => theme.palette.text.primary}
+                icon={"search"}
+                width="20"
+              />
             </InputAdornment>
           ),
         }}
@@ -90,7 +94,7 @@ const ChatUserList = ({ session }) => {
                   handlePush(e, row.id);
                 }}
                 sx={{
-                  background: "white",
+                  background: (theme) => theme.palette.background.default,
                   borderRadius: (theme) => theme.palette.borderRadius,
                   mb: "1em",
                 }}
@@ -99,6 +103,9 @@ const ChatUserList = ({ session }) => {
                   <CustomImage src={row.photo} alt={row.name} margin="0" />
                 </ListItemIcon>
                 <ListItemText
+                  // sx={{
+                  //   color: (theme) => theme.palette.text.secondary,
+                  // }}
                   primary={row.name}
                   secondary={"test chat gan !"}
                 />
