@@ -9,7 +9,7 @@ const ChatBlankLayout = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        borderRadius: "1em",
+        borderRadius: (theme) => theme.palette.borderRadius,
         background: "white",
       }}
     >

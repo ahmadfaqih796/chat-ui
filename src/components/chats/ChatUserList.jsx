@@ -46,7 +46,7 @@ const ChatUserList = ({ session }) => {
         fullWidth
         sx={{
           padding: "0.5em 1em",
-          borderRadius: "1em",
+          borderRadius: (theme) => theme.palette.borderRadius,
           background: "white",
           mb: 1,
         }}
@@ -91,7 +91,7 @@ const ChatUserList = ({ session }) => {
                 }}
                 sx={{
                   background: "white",
-                  borderRadius: "1em",
+                  borderRadius: (theme) => theme.palette.borderRadius,
                   mb: "1em",
                 }}
               >

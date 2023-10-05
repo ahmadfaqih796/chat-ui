@@ -36,6 +36,7 @@ export function ColorModeProvider({ children }) {
                   main: "#402e8d",
                 },
                 divider: purple[200],
+                borderRadius: (theme) => theme.palette.borderRadius,
                 text: {
                   primary: grey[900],
                   secondary: grey[800],
@@ -48,6 +49,7 @@ export function ColorModeProvider({ children }) {
                   default: deepOrange[900],
                   paper: deepOrange[900],
                 },
+                borderRadius: (theme) => theme.palette.borderRadius,
                 text: {
                   primary: "#fff",
                   secondary: grey[500],

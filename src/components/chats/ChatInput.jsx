@@ -44,7 +44,7 @@ const ChatInput = ({ session }) => {
           p: 2,
           mt: 2,
           background: "white",
-          borderRadius: "1em",
+          borderRadius: (theme) => theme.palette.borderRadius,
         }}
       >
         <TextField

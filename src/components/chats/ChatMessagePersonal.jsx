@@ -3,7 +3,12 @@ import { Avatar, Box, List, Typography } from "@mui/material";
 import moment from "moment/moment";
 import Image from "next/image";
 import React from "react";
-
+import {
+  styleLeft,
+  styleErrorLeft,
+  styleRight,
+  styleErrorRight,
+} from "@/styles/Chat";
 const ChatMessagePersonal = ({ data, session }) => {
   const scrollRef = React.useRef(null);
 
@@ -29,6 +34,11 @@ const ChatMessagePersonal = ({ data, session }) => {
         overflowX: "hidden",
         scrollBehavior: "smooth",
         backgroundColor: "white",
+        padding: "0.5em",
+        borderRadius: (theme) => theme.palette.borderRadius,
+        "&::-webkit-scrollbar": {
+          width: 0,
+        },
       }}
     >
       {data &&
@@ -179,7 +189,28 @@ const ChatMessagePersonal = ({ data, session }) => {
                         "anonymus"}
                     </Typography>
                   )}
-                  <Box>
+                  <Box
+                    sx={
+                      session.id == row.id_sender
+                        ? {
+                            ...styleRight,
+                            ...(row.is_deleted && {
+                              ...styleErrorRight,
+                            }),
+                          }
+                        : {
+                            ...styleLeft,
+                            ...(row.is_deleted && {
+                              ...styleErrorLeft,
+                            }),
+                          }
+                    }
+                    onClick={() => {
+                      session.id == row.id_sender && !row.is_deleted
+                        ? handleDelete(row, "delete")
+                        : null;
+                    }}
+                  >
                     {row.is_deleted ? "Pesan ini sudah dihapus" : row.text}
                   </Box>
                   <Box
