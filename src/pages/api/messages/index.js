@@ -19,10 +19,7 @@ async function handler(req, res) {
     try {
       const { body } = req;
       const response = await addMessages(body, userSession.token);
-      return res.json({
-        message: "berhasil menambahkan pesan",
-        response,
-      });
+      return res.json(response);
     } catch (error) {
       return res.status(500).json({ ok: false, message: error });
     }

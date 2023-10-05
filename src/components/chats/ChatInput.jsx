@@ -1,3 +1,4 @@
+import { socket } from "@/lib/services/socket";
 import { Box, Fab, TextField } from "@mui/material";
 import axios from "axios";
 import FeatherIcon from "feather-icons-react";
@@ -6,9 +7,8 @@ import React from "react";
 
 const ChatInput = ({ session }) => {
   const router = useRouter();
-  const [loading, setLoading] = React.useState(false);
+
   const create = async (event) => {
-    setLoading(true);
     event.preventDefault();
     const { target } = event;
     const { message } = target;
@@ -18,10 +18,9 @@ const ChatInput = ({ session }) => {
       id_receiver: session.receiver,
     };
     try {
-      await axios.post("/api/messages", payload);
-      setLoading(false);
+      const { data } = await axios.post("/api/messages", payload);
+      socket.emit("post", data);
       event.target.reset();
-      alert("berhasil");
       router.replace({
         pathname: router.pathname,
         query: {
@@ -30,7 +29,6 @@ const ChatInput = ({ session }) => {
       });
     } catch (error) {
       console.log(error);
-      setLoading(false);
       alert("gagal");
     }
   };
