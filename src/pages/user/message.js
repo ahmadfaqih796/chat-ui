@@ -3,6 +3,7 @@ import ChatInput from "@/components/chats/ChatInput";
 import ChatUserList from "@/components/chats/ChatUserList";
 import WithAuth from "@/lib/session/withAuth";
 import { Grid } from "@mui/material";
+import React from "react";
 
 export const getServerSideProps = WithAuth(async function ({ req, query }) {
   return {
@@ -16,6 +17,7 @@ export const getServerSideProps = WithAuth(async function ({ req, query }) {
 });
 
 const Message = ({ session }) => {
+  const [file, setFile] = React.useState({});
   return (
     <Grid container spacing={4}>
       <Grid item md={4}>

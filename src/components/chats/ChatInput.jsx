@@ -1,81 +1,92 @@
 import { Box, Fab, TextField } from "@mui/material";
+import axios from "axios";
 import FeatherIcon from "feather-icons-react";
+import { useRouter } from "next/router";
+import React from "react";
 
 const ChatInput = () => {
+  const router = useRouter();
+  const [loading, setLoading] = React.useState(false);
+  const create = async (event) => {
+    setLoading(true);
+    event.preventDefault();
+    const { target } = event;
+    const { message } = target;
+    const payload = {
+      text: message.value,
+    };
+    try {
+      await axios.post("/api/messages", payload);
+      setLoading(false);
+      event.target.reset();
+      alert("berhasil");
+      router.replace({
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      alert("gagal");
+    }
+  };
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        p: 2,
-        mt: 2,
-        background: "white",
-        borderRadius: "1em",
-      }}
-    >
+    <form onSubmit={create}>
       <Box
         sx={{
-          width: "80px",
-        }}
-      >
-        <label htmlFor="file-upload">
-          <Fab
-            size="medium"
-            color="primary"
-            aria-label="upload"
-            component="span"
-          >
-            <FeatherIcon icon="upload" />
-          </Fab>
-        </label>
-        <TextField
-          id="file-upload"
-          type="file"
-          name="files"
-          sx={{
-            display: "none",
-            // width: "300px",
-          }}
-          //  onChange={onSelectFile}
-          //  error={errorFiles}
-          //  helperText={errorMessage}
-        />
-      </Box>
-      <TextField
-        id="outlined-basic-email"
-        label="Type Something"
-        fullWidth
-        sx={{ ml: 1, mr: 1 }}
-        //   value={inputMessage}
-        //   onChange={(e) => setInputMessage(e.target.value)}
-      />
-      <Box
-        sx={{
-          width: "140px",
           display: "flex",
           justifyContent: "space-between",
-          textAlign: "right",
+          alignItems: "center",
+          p: 2,
+          mt: 2,
+          background: "white",
+          borderRadius: "1em",
         }}
       >
-        <Fab
-          size="medium"
-          color="error"
-          aria-label="add"
-          type="reset"
-          //  onClick={() => {
-          //    handleDeleteFile();
-          //    setInputMessage("");
-          //    setFile({});
-          //  }}
+        <TextField
+          id="outlined-basic-email"
+          label="Type Something"
+          name="message"
+          fullWidth
+          sx={{ mr: 2 }}
+          //   value={inputMessage}
+          //   onChange={(e) => setInputMessage(e.target.value)}
+        />
+        <Box
+          sx={{
+            width: "130px",
+            display: "flex",
+            justifyContent: "space-between",
+            textAlign: "right",
+          }}
         >
-          <FeatherIcon icon="trash-2" />
-        </Fab>
-        <Fab size="medium" color="primary" aria-label="add" type="submit">
-          <FeatherIcon icon="send" />
-        </Fab>
+          <label htmlFor="file-upload">
+            <Fab
+              size="medium"
+              color="primary"
+              aria-label="upload"
+              component="span"
+            >
+              <FeatherIcon icon="paperclip" />
+            </Fab>
+          </label>
+
+          <Fab size="medium" color="primary" aria-label="add" type="submit">
+            <FeatherIcon icon="send" />
+          </Fab>
+          <TextField
+            id="file-upload"
+            type="file"
+            name="files"
+            sx={{
+              display: "none",
+            }}
+          />
+        </Box>
       </Box>
-    </Box>
+    </form>
   );
 };
 
