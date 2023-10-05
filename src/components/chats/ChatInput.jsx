@@ -4,7 +4,7 @@ import FeatherIcon from "feather-icons-react";
 import { useRouter } from "next/router";
 import React from "react";
 
-const ChatInput = () => {
+const ChatInput = ({ session }) => {
   const router = useRouter();
   const [loading, setLoading] = React.useState(false);
   const create = async (event) => {
@@ -14,6 +14,8 @@ const ChatInput = () => {
     const { message } = target;
     const payload = {
       text: message.value,
+      id_sender: session.id,
+      id_receiver: session.receiver,
     };
     try {
       await axios.post("/api/messages", payload);
