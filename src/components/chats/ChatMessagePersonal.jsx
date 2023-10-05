@@ -165,9 +165,7 @@ const ChatMessagePersonal = ({ data, session }) => {
                   ) : (
                     <Avatar
                       {...stringAvatar(
-                        row?.name ||
-                          row?.user_data?.user_admin?.nama_admin ||
-                          "anonymus",
+                        row?.name || row?.user_data?.name || "anonymus",
                         35
                       )}
                       sx={{ mt: 2, ml: 2 }}
@@ -184,9 +182,7 @@ const ChatMessagePersonal = ({ data, session }) => {
                 >
                   {session.id != row.id_sender && (
                     <Typography ml={2.5} variant="body1" fontSize={12}>
-                      {row?.name ||
-                        row?.user_data?.user_admin?.nama_admin ||
-                        "anonymus"}
+                      {row?.name || row?.user_data?.name || "anonymus"}
                     </Typography>
                   )}
                   <Box
