@@ -163,9 +163,7 @@ function SidebarContent({ color }) {
                   <ListItemIcon sx={{ ml: 0.7 }}>
                     <FeatherIcon
                       color={
-                        (pathDirect === item.href
-                          ? (theme) => theme.palette.text.primary
-                          : null) ?? color
+                        (pathDirect === item.href ? "white" : null) ?? color
                       }
                       icon={item.icon}
                       width="20"

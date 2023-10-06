@@ -33,9 +33,9 @@ export function ColorModeProvider({ children }) {
                   dark: purple[400],
                 },
                 secondary: {
-                  main: "#fff",
-                  light: "#fff",
-                  dark: "#fff",
+                  main: "#97C6E3",
+                  light: "#e8f4fd",
+                  dark: "#9dabb1",
                 },
                 divider: purple[200],
                 borderRadius: "1em",
@@ -49,6 +49,11 @@ export function ColorModeProvider({ children }) {
                   main: "#330e62",
                   light: `linear-gradient(to top, #4a148c, #6e43a3 70vh)`,
                   dark: "#330e62",
+                },
+                secondary: {
+                  main: "#1565c0",
+                  light: "#0e4686",
+                  dark: "#4383cc",
                 },
                 divider: "#330e62",
                 background: {

@@ -54,11 +54,7 @@ const ChatUserList = ({ session }) => {
           disableUnderline: true,
           endAdornment: (
             <InputAdornment position="end">
-              <FeatherIcon
-                color={(theme) => theme.palette.text.primary}
-                icon={"search"}
-                width="20"
-              />
+              <FeatherIcon icon={"search"} width="20" />
             </InputAdornment>
           ),
         }}

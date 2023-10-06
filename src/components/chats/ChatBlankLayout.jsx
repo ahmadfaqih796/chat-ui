@@ -4,8 +4,8 @@ const ChatBlankLayout = () => {
   return (
     <Box
       sx={{
-        minHeight: "calc(100vh - 220px)",
-        maxHeight: "calc(100vh - 220px)",
+        minHeight: "calc(100vh - 120px)",
+        maxHeight: "calc(100vh - 120px)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

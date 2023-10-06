@@ -21,6 +21,7 @@ export const getServerSideProps = WithAuth(async function ({ req, query }) {
 });
 
 const Message = ({ session }) => {
+  console.log("se", session);
   const router = useRouter();
   const [receivedMessages, setReceivedMessages] = React.useState([]);
   const [file, setFile] = React.useState({});
@@ -29,7 +30,6 @@ const Message = ({ session }) => {
     const { data } = await axios.get(`/api/messages`, {
       params: {
         $limit: -1,
-        // grup_name: "guru",
         "$or[0][id_sender]": session.id,
         "$or[0][id_receiver]": session.receiver,
         "$or[1][id_sender]": session.receiver,
@@ -37,15 +37,20 @@ const Message = ({ session }) => {
       },
     });
     setReceivedMessages(data);
-    console.log("ssssssssssssssss", data);
+    socket.on("get", (message) => {
+      console.log("sssssssssssss", message);
+      setReceivedMessages((prevMessages) => [...prevMessages, message]);
+    });
   };
 
   React.useEffect(() => {
     fetchMessage();
-    socket.on("get", (data) => {
-      console.log("masuk", data);
-      setReceivedMessages((prevMessages) => [...prevMessages, data]);
-    });
+
+    return () => {
+      // socket.emit("before-disconnect", { id: session.id });
+      console.log("anda disconnect");
+      socket.disconnect();
+    };
   }, [router, session]);
 
   return (
@@ -55,17 +60,19 @@ const Message = ({ session }) => {
       </Grid>
       <Grid item md={8}>
         {session.receiver ? (
-          <ChatMessagePersonal session={session} data={receivedMessages} />
+          <>
+            <ChatMessagePersonal session={session} data={receivedMessages} />
+            <ChatInput
+              session={session}
+              // personal={personal}
+              // file={file}
+              // setFile={(field) => setFile(field)}
+              // grup={grup}
+            />
+          </>
         ) : (
           <ChatBlankLayout />
         )}
-        <ChatInput
-          session={session}
-          // personal={personal}
-          // file={file}
-          // setFile={(field) => setFile(field)}
-          // grup={grup}
-        />
       </Grid>
     </Grid>
   );

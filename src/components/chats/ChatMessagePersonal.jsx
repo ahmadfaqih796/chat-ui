@@ -58,7 +58,6 @@ const ChatMessagePersonal = ({ data, session }) => {
                     textAlign: "center",
                     mt: 2,
                     mb: 2,
-                    color: "gray",
                   }}
                 >
                   {moment(row.createdAt).format("D MMMM YYYY")}
