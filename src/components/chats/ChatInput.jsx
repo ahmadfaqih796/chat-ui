@@ -19,14 +19,14 @@ const ChatInput = ({ session }) => {
     };
     try {
       const { data } = await axios.post("/api/messages", payload);
-      socket.emit("post", data);
       event.target.reset();
-      router.replace({
-        pathname: router.pathname,
-        query: {
-          ...router.query,
-        },
-      });
+      socket.emit("post", data);
+      // router.replace({
+      //   pathname: router.pathname,
+      //   query: {
+      //     ...router.query,
+      //   },
+      // });
     } catch (error) {
       console.log(error);
       alert("gagal");
