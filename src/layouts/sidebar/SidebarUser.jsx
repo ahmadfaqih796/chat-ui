@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 import { stringAvatar } from "../header/stringAvatar";
 import SidebarContent from "./SidebarContent";
 
-const SidebarUser = () => {
+const SidebarUser = ({ session }) => {
   const router = useRouter();
   const handleLogout = async () => {
     await axios.post("/api/auth/logout");
@@ -25,10 +25,10 @@ const SidebarUser = () => {
     <CustomSidebar>
       <Box>
         <Avatar
-          {...stringAvatar("Ahmad Faqih Arifin", 80)}
+          {...stringAvatar(session?.name, 80)}
           style={{ margin: "0 auto 1em" }}
         />
-        <Typography textAlign="center">Ahmad Faqih Arifin</Typography>
+        <Typography textAlign="center">{session?.name}</Typography>
         <Box mt={6}>
           <SidebarContent color={"white"} />
         </Box>

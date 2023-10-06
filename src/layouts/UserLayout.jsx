@@ -10,7 +10,7 @@ function UserLayout({ children }) {
   const [open, setOpen] = React.useState(false);
   const isMobile = useMediaQuery("(max-width: 600px)");
   const { data, error } = useUserSession();
-  console.log("xxxxxxxxxxxxxxx", data, error);
+  console.log("xxxxxxxxxxxxxxx", error);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -25,7 +25,7 @@ function UserLayout({ children }) {
           isMobile={isMobile}
         />
       )}
-      <SidebarUser />
+      <SidebarUser session={data?.data} />
       <PageUserWrapper>
         <Container maxWidth={false}>
           <Box sx={{ minHeight: "calc(100vh - 0px)", padding: "3em 1em" }}>
