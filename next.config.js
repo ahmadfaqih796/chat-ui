@@ -9,6 +9,15 @@ const nextConfig = {
     ANDROID: process.env.ANDROID,
     IOS: process.env.IOS,
   },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/absen/login",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
