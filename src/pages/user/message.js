@@ -2,7 +2,6 @@ import ChatBlankLayout from "@/components/chats/ChatBlankLayout";
 import ChatInput from "@/components/chats/ChatInput";
 import ChatMessagePersonal from "@/components/chats/ChatMessagePersonal";
 import ChatUserList from "@/components/chats/ChatUserList";
-import { socket } from "@/lib/services/socket";
 import WithAuth from "@/lib/session/withAuth";
 import { Grid } from "@mui/material";
 import axios from "axios";
@@ -37,20 +36,10 @@ const Message = ({ session }) => {
       },
     });
     setReceivedMessages(data);
-    socket.on("get", (message) => {
-      console.log("sssssssssssss", message);
-      setReceivedMessages((prevMessages) => [...prevMessages, message]);
-    });
   };
 
   React.useEffect(() => {
     fetchMessage();
-
-    return () => {
-      // socket.emit("before-disconnect", { id: session.id });
-      console.log("anda disconnect");
-      socket.disconnect();
-    };
   }, [router, session]);
 
   return (

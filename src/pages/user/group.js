@@ -1,6 +1,5 @@
-import { socket } from "@/lib/services/socket";
 import WithAuth from "@/lib/session/withAuth";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const getServerSideProps = WithAuth(async function ({ req, query }) {
   const { name } = req.session.user;
@@ -19,19 +18,6 @@ const Group = ({ session }) => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    socket.on("connect", () => {
-      console.log("Terhubung ke server Socket.io");
-    });
-    socket.on("get", (message) => {
-      setMessages([...messages, message]);
-    });
-  }, [messages]);
-
-  const sendMessage = () => {
-    socket.emit("post", message);
-    setMessage("");
-  };
   return (
     <div>
       <div>

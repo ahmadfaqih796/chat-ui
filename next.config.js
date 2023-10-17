@@ -13,7 +13,7 @@ const nextConfig = {
     return [
       {
         source: "/",
-        destination: "/absen/login",
+        destination: "/authentication/login",
         permanent: false,
       },
     ];

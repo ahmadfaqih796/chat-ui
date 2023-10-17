@@ -1,9 +1,8 @@
-import { socket } from "@/lib/services/socket";
+import client from "@/utils/feathers/client";
 import { Box, Fab, TextField } from "@mui/material";
 import axios from "axios";
 import FeatherIcon from "feather-icons-react";
 import { useRouter } from "next/router";
-import React from "react";
 
 const ChatInput = ({ session }) => {
   const router = useRouter();
@@ -19,14 +18,19 @@ const ChatInput = ({ session }) => {
     };
     try {
       const { data } = await axios.post("/api/messages", payload);
+      client
+        .service("messages")
+        .create(data)
+        .then((response) => {
+          console.log("mask", response);
+        });
       event.target.reset();
-      socket.emit("post", data);
-      // router.replace({
-      //   pathname: router.pathname,
-      //   query: {
-      //     ...router.query,
-      //   },
-      // });
+      router.replace({
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+        },
+      });
     } catch (error) {
       console.log(error);
       alert("gagal");

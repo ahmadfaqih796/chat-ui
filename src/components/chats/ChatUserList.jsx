@@ -20,6 +20,7 @@ import { useRouter } from "next/router";
 const ChatUserList = ({ session }) => {
   const router = useRouter();
   const { userList, show, loading, setTempQuery } = useFetchUser(session.token);
+  console.log("user list", userList);
   const handleSearch = (e) => {
     e.preventDefault();
     setTempQuery(e.target.value);
@@ -83,7 +84,7 @@ const ChatUserList = ({ session }) => {
             }}
           />
         ) : (
-          userList.map((row) => (
+          userList?.map((row) => (
             <Grow in={show} key={row.id} timeout={500}>
               <ListItem
                 onClick={(e) => {
